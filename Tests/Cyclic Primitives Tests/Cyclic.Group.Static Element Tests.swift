@@ -208,4 +208,44 @@ extension Cyclic.Group.`Static Element Test`.`Edge Case` {
         let diff = a - b
         #expect(diff.position == 4)  // 0 - 1 wraps to 4
     }
+
+    // MARK: Zero-order boundary
+
+    @Test
+    func `Zero-order wrapping construction traps before modulo`() async {
+        await #expect(processExitsWith: .failure) {
+            _ = Cyclic.Group.Static<0>.Element(wrapping: Ordinal(3))
+        }
+    }
+
+    @Test
+    func `Zero-order addition traps on the order guard, not modulo by zero`() async {
+        await #expect(processExitsWith: .failure) {
+            let zero = Cyclic.Group.Static<0>.Element.zero
+            _ = zero + zero
+        }
+    }
+
+    @Test
+    func `Zero-order subtraction traps on the order guard, not modulo by zero`() async {
+        await #expect(processExitsWith: .failure) {
+            let zero = Cyclic.Group.Static<0>.Element.zero
+            _ = zero - zero
+        }
+    }
+
+    @Test
+    func `Zero-order order access traps`() async {
+        await #expect(processExitsWith: .failure) {
+            _ = Cyclic.Group.Static<0>.Element.order
+        }
+    }
+
+    @Test
+    func `Order one arithmetic never touches the guard`() {
+        let zero = Cyclic.Group.Static<1>.Element.zero
+        #expect((zero + zero).position == 0)
+        #expect((zero - zero).position == 0)
+        #expect(Cyclic.Group.Static<1>.Element.order == 1)
+    }
 }

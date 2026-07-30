@@ -93,12 +93,17 @@ extension Cyclic.Group.Static.Element {
     /// for arithmetic against `position: Ordinal`.
     ///
     /// In group theory, the order of a finite cyclic group is its modulus.
+    ///
+    /// - Precondition: `modulus > 0`. A non-positive compile-time modulus is
+    ///   rejected here, before any modular reduction can reach an integer
+    ///   modulo by zero.
     @inlinable
     public static var order: Cardinal {
-        // reason: modulus > 0 by Cyclic.Group.Static<modulus> documented contract; Cardinal(Int) only throws on negative input.
+        precondition(modulus > 0, "Cyclic group order must be positive; Cyclic.Group.Static<\(modulus)> has no elements")
+        // reason: modulus > 0 is established by the precondition above; Cardinal(Int) only throws on negative input.
         // swift-format-ignore: NeverUseForceTry
         // swiftlint:disable:next force_try
-        try! Cardinal(modulus)
+        return try! Cardinal(modulus)
     }
 }
 
