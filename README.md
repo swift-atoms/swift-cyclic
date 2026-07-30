@@ -63,12 +63,20 @@ The package is pre-1.0 — until 0.1.0 is tagged, depend on `branch: "main"` rat
 
 ## Architecture
 
-Two library products: the umbrella source target and a Test Support spine.
+Eight library products: an umbrella, six subject-domain sub-products, and a Test Support spine.
 
 | Product | Target | Purpose |
 |---------|--------|---------|
-| `Cyclic Primitives` | `Sources/Cyclic Primitives/` | The dynamic surface (`Cyclic.Group.Element`, `Cyclic.Group.Modulus`, free-function operations), the static surface (`Cyclic.Group.Static<let N: Int>`, its `Element` + `Element.Error`, `Iterator`), `Tagged<Tag, Cyclic.Group.Static<N>.Element>` arithmetic, and an `Ordinal(_:)` conversion from a static element. The package re-exports `Cardinal_Primitives`, `Comparison_Primitives`, `Hash_Primitives`, `Index_Primitives`, `Ordinal_Primitives`, `Sequence_Primitives`, and `Tagged_Primitives` so a single `import Cyclic_Primitives` brings the full surface into scope. |
+| `Cyclic Primitives` | `Sources/Cyclic Primitives/` | Umbrella that re-exports every sub-product below. The dynamic surface (`Cyclic.Group.Element`, `Cyclic.Group.Modulus`, free-function operations), the static surface (`Cyclic.Group.Static<let N: Int>`, its `Element` + `Element.Error`, `Iterator`), `Tagged<Tag, Cyclic.Group.Static<N>.Element>` arithmetic, and an `Ordinal(_:)` conversion from a static element. The package re-exports `Cardinal_Primitives`, `Comparison_Primitives`, `Hash_Primitives`, `Index_Primitives`, `Ordinal_Primitives`, `Sequence_Primitives`, and `Tagged_Primitives` so a single `import Cyclic_Primitives` brings the full surface into scope. |
+| `Cyclic Group Primitives` | `Sources/Cyclic Group Primitives/` | The dynamic surface: `Cyclic.Group.Element`, `Cyclic.Group.Modulus`, and free-function operations. |
+| `Cyclic Group Static Primitives` | `Sources/Cyclic Group Static Primitives/` | The static surface: `Cyclic.Group.Static<let N: Int>`. |
+| `Cyclic Group Static Element Primitives` | `Sources/Cyclic Group Static Element Primitives/` | `Cyclic.Group.Static<N>.Element`, its `Element.Error`, and its `Iterator`. |
+| `Cyclic Namespace Primitives` | `Sources/Cyclic Namespace Primitives/` | The shared `Cyclic` namespace enum. |
+| `Cyclic Primitives Standard Library Integration` | `Sources/Cyclic Primitives Standard Library Integration/` | The `Ordinal(_:)` conversion from a static element and other stdlib bridges. |
+| `Cyclic Primitives Tagged Integration` | `Sources/Cyclic Primitives Tagged Integration/` | `Tagged<Tag, Cyclic.Group.Static<N>.Element>` arithmetic. |
 | `Cyclic Primitives Test Support` | `Tests/Support/` | An `ExpressibleByIntegerLiteral` conformance for `Cyclic.Group.Static<N>.Element` so test sites can write `let a: Cyclic.Group.Static<5>.Element = 3` rather than `try! .init(Ordinal(3))`. Trapping; production code uses the throwing `init(_:)`. |
+
+`Cyclic Primitives` is the supported default for consumer code; the six subject-domain products above are implementation details that back the umbrella and exist to keep a narrow dependency available. `Cyclic Primitives Test Support` is the only other product intended for direct import, and only from test targets.
 
 Foundation-free. No platform conditionals.
 
