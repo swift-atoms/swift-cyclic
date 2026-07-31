@@ -9,5 +9,12 @@
 //
 // ===----------------------------------------------------------------------===//
 
-/// Namespace for cyclic types.
-public enum Cyclic {}
+public import Cyclic_Namespace_Primitives
+
+extension Cyclic.Group.Modulus {
+    /// Error thrown when modulus construction fails.
+    public enum Error: Swift.Error, Hashable, Sendable {
+        /// The modulus must be greater than zero.
+        case zeroModulus
+    }
+}
