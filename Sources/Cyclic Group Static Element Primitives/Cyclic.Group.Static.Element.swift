@@ -99,7 +99,10 @@ extension Cyclic.Group.Static.Element {
     ///   modulo by zero.
     @inlinable
     public static var order: Cardinal {
-        precondition(modulus > 0, "Cyclic group order must be positive; Cyclic.Group.Static<\(modulus)> has no elements")
+        precondition(
+            modulus > 0,
+            "Cyclic group order must be positive; Cyclic.Group.Static<\(modulus)> has no elements"
+        )
         // reason: modulus > 0 is established by the precondition above; Cardinal(Int) only throws on negative input.
         // swift-format-ignore: NeverUseForceTry
         // swiftlint:disable:next force_try

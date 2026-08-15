@@ -162,7 +162,7 @@ extension Cyclic.Group.`Static Element Test`.Unit {
     // MARK: Comparable
 
     @Test
-    func Ordering() {
+    func `Ordering`() {
         let a: Cyclic.Group.Static<5>.Element = 2
         let b: Cyclic.Group.Static<5>.Element = 4
         #expect(a < b)

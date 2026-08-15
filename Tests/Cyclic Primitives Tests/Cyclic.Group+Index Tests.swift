@@ -42,7 +42,8 @@ extension Cyclic.Group.`Index Test`.Unit {
     // MARK: Cyclic.Group.Modulus from typed Count
 
     @Test
-    func `Modulus from typed Count succeeds for positive count`() throws(Cyclic.Group.Modulus.Error) {
+    func `Modulus from typed Count succeeds for positive count`() throws(Cyclic.Group.Modulus.Error)
+    {
         let count: Index<Slot>.Count = .init(Cardinal(5))
         let modulus = try Cyclic.Group.Modulus(count)
         #expect(modulus.value == Cardinal(5))
