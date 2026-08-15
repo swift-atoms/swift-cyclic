@@ -55,32 +55,48 @@ extension Cyclic.Group.`Tagged Static Element Test`.Unit {
 
     @Test
     func `addition wraps modulo N`() {
-        let a: Tagged<Slot, Cyclic.Group.Static<5>.Element> = .init(Cyclic.Group.Static<5>.Element(__unchecked: Ordinal(4)))
-        let b: Tagged<Slot, Cyclic.Group.Static<5>.Element> = .init(Cyclic.Group.Static<5>.Element(__unchecked: Ordinal(3)))
+        let a: Tagged<Slot, Cyclic.Group.Static<5>.Element> = .init(
+            Cyclic.Group.Static<5>.Element(__unchecked: Ordinal(4))
+        )
+        let b: Tagged<Slot, Cyclic.Group.Static<5>.Element> = .init(
+            Cyclic.Group.Static<5>.Element(__unchecked: Ordinal(3))
+        )
         let sum = a + b
         #expect(sum.underlying.position == 2)  // (4 + 3) mod 5 = 2
     }
 
     @Test
     func `subtraction wraps modulo N`() {
-        let a: Tagged<Slot, Cyclic.Group.Static<5>.Element> = .init(Cyclic.Group.Static<5>.Element(__unchecked: Ordinal(1)))
-        let b: Tagged<Slot, Cyclic.Group.Static<5>.Element> = .init(Cyclic.Group.Static<5>.Element(__unchecked: Ordinal(3)))
+        let a: Tagged<Slot, Cyclic.Group.Static<5>.Element> = .init(
+            Cyclic.Group.Static<5>.Element(__unchecked: Ordinal(1))
+        )
+        let b: Tagged<Slot, Cyclic.Group.Static<5>.Element> = .init(
+            Cyclic.Group.Static<5>.Element(__unchecked: Ordinal(3))
+        )
         let diff = a - b
         #expect(diff.underlying.position == 3)  // (1 - 3 + 5) mod 5 = 3
     }
 
     @Test
     func `compound addition wraps`() {
-        var a: Tagged<Slot, Cyclic.Group.Static<5>.Element> = .init(Cyclic.Group.Static<5>.Element(__unchecked: Ordinal(3)))
-        let b: Tagged<Slot, Cyclic.Group.Static<5>.Element> = .init(Cyclic.Group.Static<5>.Element(__unchecked: Ordinal(4)))
+        var a: Tagged<Slot, Cyclic.Group.Static<5>.Element> = .init(
+            Cyclic.Group.Static<5>.Element(__unchecked: Ordinal(3))
+        )
+        let b: Tagged<Slot, Cyclic.Group.Static<5>.Element> = .init(
+            Cyclic.Group.Static<5>.Element(__unchecked: Ordinal(4))
+        )
         a += b
         #expect(a.underlying.position == 2)  // (3 + 4) mod 5 = 2
     }
 
     @Test
     func `compound subtraction wraps`() {
-        var a: Tagged<Slot, Cyclic.Group.Static<5>.Element> = .init(Cyclic.Group.Static<5>.Element(__unchecked: Ordinal(0)))
-        let b: Tagged<Slot, Cyclic.Group.Static<5>.Element> = .init(Cyclic.Group.Static<5>.Element(__unchecked: Ordinal(1)))
+        var a: Tagged<Slot, Cyclic.Group.Static<5>.Element> = .init(
+            Cyclic.Group.Static<5>.Element(__unchecked: Ordinal(0))
+        )
+        let b: Tagged<Slot, Cyclic.Group.Static<5>.Element> = .init(
+            Cyclic.Group.Static<5>.Element(__unchecked: Ordinal(1))
+        )
         a -= b
         #expect(a.underlying.position == 4)  // 0 - 1 wraps to 4
     }
@@ -89,7 +105,9 @@ extension Cyclic.Group.`Tagged Static Element Test`.Unit {
 
     @Test
     func `inverse property a plus inverse equals zero`() {
-        let a: Tagged<Slot, Cyclic.Group.Static<7>.Element> = .init(Cyclic.Group.Static<7>.Element(__unchecked: Ordinal(4)))
+        let a: Tagged<Slot, Cyclic.Group.Static<7>.Element> = .init(
+            Cyclic.Group.Static<7>.Element(__unchecked: Ordinal(4))
+        )
         let sum = a + a.inverse()
         #expect(sum.underlying.position == 0)
     }
