@@ -1,14 +1,3 @@
-// ===----------------------------------------------------------------------===//
-//
-// This source file is part of the swift-primitives open source project
-//
-// Copyright (c) 2024-2026 Coen ten Thije Boonkkamp and the swift-primitives project authors
-// Licensed under Apache License v2.0
-//
-// See LICENSE for license information
-//
-// ===----------------------------------------------------------------------===//
-
 import Cyclic_Primitives_Test_Support
 import Testing
 
@@ -26,11 +15,7 @@ extension Cyclic.Group {
     }
 }
 
-// MARK: - Unit
-
 extension Cyclic.Group.`Index Test`.Unit {
-
-    // MARK: Cyclic.Group.Element from typed Index
 
     @Test
     func `Element from typed Index`() {
@@ -39,8 +24,6 @@ extension Cyclic.Group.`Index Test`.Unit {
         #expect(element.residue == Ordinal(3))
     }
 
-    // MARK: Cyclic.Group.Modulus from typed Count
-
     @Test
     func `Modulus from typed Count succeeds for positive count`() throws(Cyclic.Group.Modulus.Error)
     {
@@ -48,8 +31,6 @@ extension Cyclic.Group.`Index Test`.Unit {
         let modulus = try Cyclic.Group.Modulus(count)
         #expect(modulus.value == Cardinal(5))
     }
-
-    // MARK: Cyclic.Group.advanced — positive offset
 
     @Test
     func `advanced by positive offset within modulus`() throws(Cyclic.Group.Modulus.Error) {
@@ -66,10 +47,8 @@ extension Cyclic.Group.`Index Test`.Unit {
         let start = Cyclic.Group.Element(__unchecked: Ordinal(4))
         let offset: Index<Slot>.Offset = .init(3)
         let advanced = Cyclic.Group.advanced(start, by: offset, modulus: modulus)
-        #expect(advanced.residue == Ordinal(2))  // (4 + 3) mod 5 = 2
+        #expect(advanced.residue == Ordinal(2))
     }
-
-    // MARK: Cyclic.Group.advanced — negative offset
 
     @Test
     func `advanced by negative offset within modulus`() throws(Cyclic.Group.Modulus.Error) {
@@ -86,11 +65,9 @@ extension Cyclic.Group.`Index Test`.Unit {
         let start = Cyclic.Group.Element(__unchecked: Ordinal(1))
         let offset: Index<Slot>.Offset = .init(-3)
         let advanced = Cyclic.Group.advanced(start, by: offset, modulus: modulus)
-        #expect(advanced.residue == Ordinal(3))  // (1 - 3 + 5) mod 5 = 3
+        #expect(advanced.residue == Ordinal(3))
     }
 }
-
-// MARK: - Edge Case
 
 extension Cyclic.Group.`Index Test`.`Edge Case` {
 

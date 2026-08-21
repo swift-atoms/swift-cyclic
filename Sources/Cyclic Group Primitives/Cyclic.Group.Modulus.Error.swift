@@ -1,20 +1,9 @@
-// ===----------------------------------------------------------------------===//
-//
-// This source file is part of the swift-primitives open source project
-//
-// Copyright (c) 2024-2026 Coen ten Thije Boonkkamp and the swift-primitives project authors
-// Licensed under Apache License v2.0
-//
-// See LICENSE for license information
-//
-// ===----------------------------------------------------------------------===//
-
 public import Cyclic_Namespace_Primitives
 
 extension Cyclic.Group.Modulus {
-    /// Error thrown when modulus construction fails.
+
     public enum Error: Swift.Error, Hashable, Sendable {
-        /// The modulus must be greater than zero.
+
         case zeroModulus
     }
 }

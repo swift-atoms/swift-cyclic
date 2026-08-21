@@ -1,14 +1,3 @@
-// ===----------------------------------------------------------------------===//
-//
-// This source file is part of the swift-primitives open source project
-//
-// Copyright (c) 2024-2026 Coen ten Thije Boonkkamp and the swift-primitives project authors
-// Licensed under Apache License v2.0
-//
-// See LICENSE for license information
-//
-// ===----------------------------------------------------------------------===//
-
 import Cyclic_Primitives_Test_Support
 import Testing
 
@@ -24,11 +13,7 @@ extension Cyclic.Group {
     }
 }
 
-// MARK: - Unit
-
 extension Cyclic.Group.`Static Element Test`.Unit {
-
-    // MARK: Construction
 
     @Test
     func `Valid construction via throwing init`() throws(Cyclic.Group.Static<5>.Element.Error) {
@@ -38,8 +23,6 @@ extension Cyclic.Group.`Static Element Test`.Unit {
         let g4 = try Cyclic.Group.Static<5>.Element(Ordinal(4))
         #expect(g4.position == 4)
     }
-
-    // MARK: Identity and Generator
 
     @Test
     func `Zero is identity`() {
@@ -61,8 +44,6 @@ extension Cyclic.Group.`Static Element Test`.Unit {
         #expect(one.position == 0)
     }
 
-    // MARK: Group Operation (Addition)
-
     @Test
     func `Addition without wrap`() {
         let a: Cyclic.Group.Static<10>.Element = 3
@@ -76,7 +57,7 @@ extension Cyclic.Group.`Static Element Test`.Unit {
         let a: Cyclic.Group.Static<5>.Element = 4
         let b: Cyclic.Group.Static<5>.Element = 3
         let sum = a + b
-        #expect(sum.position == 2)  // (4 + 3) mod 5 = 2
+        #expect(sum.position == 2)
     }
 
     @Test
@@ -85,8 +66,6 @@ extension Cyclic.Group.`Static Element Test`.Unit {
         let result = a + .zero
         #expect(result == a)
     }
-
-    // MARK: Inverse Operation (Subtraction)
 
     @Test
     func `Subtraction without wrap`() {
@@ -101,10 +80,8 @@ extension Cyclic.Group.`Static Element Test`.Unit {
         let a: Cyclic.Group.Static<5>.Element = 1
         let b: Cyclic.Group.Static<5>.Element = 3
         let diff = a - b
-        #expect(diff.position == 3)  // (1 - 3 + 5) mod 5 = 3
+        #expect(diff.position == 3)
     }
-
-    // MARK: Additive Inverse
 
     @Test
     func `Inverse property a plus inverse equals zero`() {
@@ -120,15 +97,13 @@ extension Cyclic.Group.`Static Element Test`.Unit {
         #expect(zero.inverse == .zero)
     }
 
-    // MARK: Compound Operations
-
     @Test
     func `Compound addition`() {
         var g: Cyclic.Group.Static<5>.Element = 3
         g += .one
         #expect(g.position == 4)
         g += .one
-        #expect(g.position == 0)  // wraps
+        #expect(g.position == 0)
     }
 
     @Test
@@ -137,29 +112,25 @@ extension Cyclic.Group.`Static Element Test`.Unit {
         g -= .one
         #expect(g.position == 0)
         g -= .one
-        #expect(g.position == 4)  // wraps
+        #expect(g.position == 4)
     }
-
-    // MARK: Ring Buffer Use Case
 
     @Test
     func `Ring buffer index advancement`() {
         var tail = Cyclic.Group.Static<4>.Element.zero
 
-        tail += .one  // 1
+        tail += .one
         #expect(tail.position == 1)
 
-        tail += .one  // 2
+        tail += .one
         #expect(tail.position == 2)
 
-        tail += .one  // 3
+        tail += .one
         #expect(tail.position == 3)
 
-        tail += .one  // 0 (wraps)
+        tail += .one
         #expect(tail.position == 0)
     }
-
-    // MARK: Comparable
 
     @Test
     func `Ordering`() {
@@ -170,8 +141,6 @@ extension Cyclic.Group.`Static Element Test`.Unit {
         #expect(!(a < a))
     }
 
-    // MARK: Modulus
-
     @Test
     func `Modulus property`() {
         #expect(Cyclic.Group.Static<7>.modulus == 7)
@@ -179,8 +148,6 @@ extension Cyclic.Group.`Static Element Test`.Unit {
         #expect(Cyclic.Group.Static<100>.modulus == 100)
     }
 }
-
-// MARK: - Edge Case
 
 extension Cyclic.Group.`Static Element Test`.`Edge Case` {
 
@@ -206,10 +173,8 @@ extension Cyclic.Group.`Static Element Test`.`Edge Case` {
         let a: Cyclic.Group.Static<5>.Element = 0
         let b: Cyclic.Group.Static<5>.Element = 1
         let diff = a - b
-        #expect(diff.position == 4)  // 0 - 1 wraps to 4
+        #expect(diff.position == 4)
     }
-
-    // MARK: Zero-order boundary
 
     @Test
     func `Zero-order wrapping construction traps before modulo`() async {

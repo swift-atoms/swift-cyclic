@@ -12,7 +12,7 @@ let package = Package(
         .visionOS(.v27),
     ],
     products: [
-        // MARK: - Sub-targets
+
         .library(
             name: "Cyclic Group Primitives",
             targets: ["Cyclic Group Primitives"]
@@ -38,13 +38,11 @@ let package = Package(
             targets: ["Cyclic Primitives Tagged Integration"]
         ),
 
-        // MARK: - Umbrella
         .library(
             name: "Cyclic Primitives",
             targets: ["Cyclic Primitives"]
         ),
 
-        // MARK: - Test Support
         .library(
             name: "Cyclic Primitives Test Support",
             targets: ["Cyclic Primitives Test Support"]
@@ -77,12 +75,11 @@ let package = Package(
         ),
     ],
     targets: [
-        // MARK: - Namespace
+
         .target(
             name: "Cyclic Namespace Primitives"
         ),
 
-        // MARK: - Group.Static
         .target(
             name: "Cyclic Group Static Primitives",
             dependencies: [
@@ -90,7 +87,6 @@ let package = Package(
             ]
         ),
 
-        // MARK: - Group.Static.Element
         .target(
             name: "Cyclic Group Static Element Primitives",
             dependencies: [
@@ -101,7 +97,6 @@ let package = Package(
             ]
         ),
 
-        // MARK: - Group (dynamic)
         .target(
             name: "Cyclic Group Primitives",
             dependencies: [
@@ -112,7 +107,6 @@ let package = Package(
             ]
         ),
 
-        // MARK: - Standard Library Integration
         .target(
             name: "Cyclic Primitives Standard Library Integration",
             dependencies: [
@@ -122,7 +116,6 @@ let package = Package(
             ]
         ),
 
-        // MARK: - Tagged Integration
         .target(
             name: "Cyclic Primitives Tagged Integration",
             dependencies: [
@@ -132,7 +125,6 @@ let package = Package(
             ]
         ),
 
-        // MARK: - Umbrella
         .target(
             name: "Cyclic Primitives",
             dependencies: [
@@ -145,7 +137,6 @@ let package = Package(
             ]
         ),
 
-        // MARK: - Test Support
         .target(
             name: "Cyclic Primitives Test Support",
             dependencies: ["Cyclic Primitives"],

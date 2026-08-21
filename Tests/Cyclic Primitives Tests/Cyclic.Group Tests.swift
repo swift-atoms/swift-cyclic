@@ -1,14 +1,3 @@
-// ===----------------------------------------------------------------------===//
-//
-// This source file is part of the swift-primitives open source project
-//
-// Copyright (c) 2024-2026 Coen ten Thije Boonkkamp and the swift-primitives project authors
-// Licensed under Apache License v2.0
-//
-// See LICENSE for license information
-//
-// ===----------------------------------------------------------------------===//
-
 import Testing
 
 @testable import Cyclic_Primitives
@@ -23,19 +12,13 @@ extension Cyclic.Group {
     }
 }
 
-// MARK: - Unit
-
 extension Cyclic.Group.Test.Unit {
-
-    // MARK: Modulus Construction
 
     @Test
     func `Valid modulus construction`() throws(Cyclic.Group.Modulus.Error) {
         let modulus = try Cyclic.Group.Modulus(Cardinal(5))
         #expect(modulus.value == Cardinal(5))
     }
-
-    // MARK: Element Construction
 
     @Test
     func `Element construction with normalization`() throws(Cyclic.Group.Modulus.Error) {
@@ -47,12 +30,9 @@ extension Cyclic.Group.Test.Unit {
         let e3 = Cyclic.Group.Element(Ordinal(3), modulus: modulus)
         #expect(e3.residue == Ordinal(3))
 
-        // Normalization: 7 mod 5 = 2
         let e7 = Cyclic.Group.Element(Ordinal(7), modulus: modulus)
         #expect(e7.residue == Ordinal(2))
     }
-
-    // MARK: Successor
 
     @Test
     func `Successor without wrap`() throws(Cyclic.Group.Modulus.Error) {
@@ -70,8 +50,6 @@ extension Cyclic.Group.Test.Unit {
         #expect(next.residue == Ordinal(0))
     }
 
-    // MARK: Predecessor
-
     @Test
     func `Predecessor without wrap`() throws(Cyclic.Group.Modulus.Error) {
         let modulus = try Cyclic.Group.Modulus(Cardinal(5))
@@ -88,8 +66,6 @@ extension Cyclic.Group.Test.Unit {
         #expect(prev.residue == Ordinal(4))
     }
 
-    // MARK: Add
-
     @Test
     func `Add without wrap`() throws(Cyclic.Group.Modulus.Error) {
         let modulus = try Cyclic.Group.Modulus(Cardinal(10))
@@ -105,10 +81,8 @@ extension Cyclic.Group.Test.Unit {
         let a = Cyclic.Group.Element(__unchecked: Ordinal(4))
         let b = Cyclic.Group.Element(__unchecked: Ordinal(3))
         let sum = Cyclic.Group.add(a, b, modulus: modulus)
-        #expect(sum.residue == Ordinal(2))  // (4 + 3) mod 5 = 2
+        #expect(sum.residue == Ordinal(2))
     }
-
-    // MARK: Subtract
 
     @Test
     func `Subtract without wrap`() throws(Cyclic.Group.Modulus.Error) {
@@ -125,10 +99,8 @@ extension Cyclic.Group.Test.Unit {
         let a = Cyclic.Group.Element(__unchecked: Ordinal(1))
         let b = Cyclic.Group.Element(__unchecked: Ordinal(3))
         let diff = Cyclic.Group.subtract(a, b, modulus: modulus)
-        #expect(diff.residue == Ordinal(3))  // (1 - 3 + 5) mod 5 = 3
+        #expect(diff.residue == Ordinal(3))
     }
-
-    // MARK: Inverse
 
     @Test
     func `Inverse property element plus inverse equals zero`() throws(Cyclic.Group.Modulus.Error) {
@@ -146,8 +118,6 @@ extension Cyclic.Group.Test.Unit {
         #expect(inv.residue == Ordinal(0))
     }
 
-    // MARK: Ring Buffer Simulation
-
     @Test
     func `Ring buffer index advancement`() throws(Cyclic.Group.Modulus.Error) {
         let capacity = try Cyclic.Group.Modulus(Cardinal(4))
@@ -163,11 +133,9 @@ extension Cyclic.Group.Test.Unit {
         #expect(tail.residue == Ordinal(3))
 
         tail = Cyclic.Group.successor(tail, modulus: capacity)
-        #expect(tail.residue == Ordinal(0))  // wraps
+        #expect(tail.residue == Ordinal(0))
     }
 }
-
-// MARK: - Edge Case
 
 extension Cyclic.Group.Test.`Edge Case` {
 

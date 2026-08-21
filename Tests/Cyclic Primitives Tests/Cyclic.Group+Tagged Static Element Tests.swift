@@ -1,14 +1,3 @@
-// ===----------------------------------------------------------------------===//
-//
-// This source file is part of the swift-primitives open source project
-//
-// Copyright (c) 2024-2026 Coen ten Thije Boonkkamp and the swift-primitives project authors
-// Licensed under Apache License v2.0
-//
-// See LICENSE for license information
-//
-// ===----------------------------------------------------------------------===//
-
 import Cyclic_Primitives_Test_Support
 import Testing
 
@@ -26,11 +15,7 @@ extension Cyclic.Group {
     }
 }
 
-// MARK: - Unit
-
 extension Cyclic.Group.`Tagged Static Element Test`.Unit {
-
-    // MARK: Construction
 
     @Test
     func `init from Element`() {
@@ -48,10 +33,8 @@ extension Cyclic.Group.`Tagged Static Element Test`.Unit {
     @Test
     func `init wrapping reduces position`() {
         let tagged: Tagged<Slot, Cyclic.Group.Static<5>.Element> = .init(wrapping: Ordinal(7))
-        #expect(tagged.underlying.position == 2)  // 7 mod 5 = 2
+        #expect(tagged.underlying.position == 2)
     }
-
-    // MARK: Arithmetic
 
     @Test
     func `addition wraps modulo N`() {
@@ -62,7 +45,7 @@ extension Cyclic.Group.`Tagged Static Element Test`.Unit {
             Cyclic.Group.Static<5>.Element(__unchecked: Ordinal(3))
         )
         let sum = a + b
-        #expect(sum.underlying.position == 2)  // (4 + 3) mod 5 = 2
+        #expect(sum.underlying.position == 2)
     }
 
     @Test
@@ -74,7 +57,7 @@ extension Cyclic.Group.`Tagged Static Element Test`.Unit {
             Cyclic.Group.Static<5>.Element(__unchecked: Ordinal(3))
         )
         let diff = a - b
-        #expect(diff.underlying.position == 3)  // (1 - 3 + 5) mod 5 = 3
+        #expect(diff.underlying.position == 3)
     }
 
     @Test
@@ -86,7 +69,7 @@ extension Cyclic.Group.`Tagged Static Element Test`.Unit {
             Cyclic.Group.Static<5>.Element(__unchecked: Ordinal(4))
         )
         a += b
-        #expect(a.underlying.position == 2)  // (3 + 4) mod 5 = 2
+        #expect(a.underlying.position == 2)
     }
 
     @Test
@@ -98,10 +81,8 @@ extension Cyclic.Group.`Tagged Static Element Test`.Unit {
             Cyclic.Group.Static<5>.Element(__unchecked: Ordinal(1))
         )
         a -= b
-        #expect(a.underlying.position == 4)  // 0 - 1 wraps to 4
+        #expect(a.underlying.position == 4)
     }
-
-    // MARK: Inverse
 
     @Test
     func `inverse property a plus inverse equals zero`() {
@@ -112,8 +93,6 @@ extension Cyclic.Group.`Tagged Static Element Test`.Unit {
         #expect(sum.underlying.position == 0)
     }
 }
-
-// MARK: - Edge Case
 
 extension Cyclic.Group.`Tagged Static Element Test`.`Edge Case` {
 
