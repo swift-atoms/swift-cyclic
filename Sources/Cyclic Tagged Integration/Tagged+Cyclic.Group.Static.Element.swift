@@ -1,6 +1,6 @@
-public import Cyclic_Group_Static_Element_Primitives
-internal import Ordinal_Primitives
-public import Tagged_Primitives
+public import Cyclic_Group_Static_Element
+internal import Ordinal
+public import Tagged
 
 extension Tagged where Tag: ~Copyable & ~Escapable {
 

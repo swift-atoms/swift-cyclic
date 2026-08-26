@@ -1,7 +1,7 @@
-import Cyclic_Primitives_Test_Support
+import Cyclic_Test_Support
 import Testing
 
-@testable import Cyclic_Primitives
+@testable import Cyclic
 
 private enum Slot {}
 

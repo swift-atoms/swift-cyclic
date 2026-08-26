@@ -1,6 +1,6 @@
 import Testing
 
-@testable import Cyclic_Primitives
+@testable import Cyclic
 
 extension Cyclic.Group {
     @Suite
