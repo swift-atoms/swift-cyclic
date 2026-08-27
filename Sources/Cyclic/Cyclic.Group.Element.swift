@@ -1,5 +1,4 @@
 internal import Cardinal
-public import Cyclic_Namespace
 public import Index
 internal import Ordinal
 

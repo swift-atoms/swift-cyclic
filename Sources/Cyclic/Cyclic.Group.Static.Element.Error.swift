@@ -1,5 +1,3 @@
-public import Cyclic_Group_Static
-public import Cyclic_Namespace
 
 extension Cyclic.Group.Static.Element {
 

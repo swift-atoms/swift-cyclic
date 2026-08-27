@@ -1,4 +1,3 @@
-import Cyclic_Test_Support
 import Testing
 
 @testable import Cyclic

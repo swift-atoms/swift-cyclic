@@ -1,6 +1,4 @@
 public import Cardinal
-public import Cyclic_Group_Static
-public import Cyclic_Namespace
 public import Ordinal
 
 extension Cyclic.Group.Static {
