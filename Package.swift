@@ -17,8 +17,8 @@ let package = Package(
             targets: ["Cyclic"]
         ),
         .library(
-            name: "Cyclic Standard Library Integration",
-            targets: ["Cyclic Standard Library Integration"]
+            name: "Cyclic Test Support",
+            targets: ["Cyclic Test Support"]
         ),
         .library(
             name: "Cyclic Apple Foundation Integration",
@@ -49,19 +49,25 @@ let package = Package(
             ]
         ),
         .target(
-            name: "Cyclic Standard Library Integration",
-            dependencies: ["Cyclic"]
+            name: "Cyclic Test Support",
+            dependencies: [
+                "Cyclic",
+                .product(name: "Ordinal", package: "swift-ordinal"),
+            ]
         ),
         .target(
             name: "Cyclic Apple Foundation Integration",
-            dependencies: [
-                "Cyclic",
-                "Cyclic Standard Library Integration",
-            ]
+            dependencies: ["Cyclic"]
         ),
         .testTarget(
             name: "Cyclic Tests",
-            dependencies: ["Cyclic"]
+            dependencies: [
+                "Cyclic",
+                "Cyclic Test Support",
+                .product(name: "Cardinal", package: "swift-cardinal"),
+                .product(name: "Index", package: "swift-index"),
+                .product(name: "Ordinal", package: "swift-ordinal"),
+            ]
         ),
     ],
     swiftLanguageModes: [.v6]

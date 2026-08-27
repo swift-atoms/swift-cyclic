@@ -16,18 +16,29 @@ extension Cyclic.Group.Static.Element {
 
     @inlinable
     public static func + (lhs: Self, rhs: Self) -> Self {
-        let sum = lhs.position + Cardinal(rhs.position)
-        let reduced = sum % Self.order
-        return Self(__unchecked: reduced)
+        Self(
+            __unchecked: Ordinal(
+                Cyclic.modularSum(
+                    lhs.position.rawValue,
+                    rhs.position.rawValue,
+                    modulus: Self.order.rawValue
+                )
+            )
+        )
     }
 
     @inlinable
     public static func - (lhs: Self, rhs: Self) -> Self {
 
-        let inverse = Self.order.subtract.saturating(Cardinal(rhs.position))
-        let sum = lhs.position + inverse
-        let reduced = sum % Self.order
-        return Self(__unchecked: reduced)
+        Self(
+            __unchecked: Ordinal(
+                Cyclic.modularDifference(
+                    lhs.position.rawValue,
+                    rhs.position.rawValue,
+                    modulus: Self.order.rawValue
+                )
+            )
+        )
     }
 
     @inlinable
@@ -45,9 +56,10 @@ extension Cyclic.Group.Static.Element {
 
     @inlinable
     public var inverse: Self {
-        if position == .zero { return self }
-
-        let inv = Self.order.subtract.saturating(Cardinal(position))
-        return Self(__unchecked: Ordinal(inv))
+        Self(
+            __unchecked: Ordinal(
+                Cyclic.modularDifference(0, position.rawValue, modulus: Self.order.rawValue)
+            )
+        )
     }
 }

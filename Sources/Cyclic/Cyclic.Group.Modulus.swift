@@ -1,5 +1,4 @@
 public import Cardinal
-public import Index
 
 extension Cyclic.Group {
 
@@ -9,7 +8,7 @@ extension Cyclic.Group {
 
         @inlinable
         public init(_ value: Cardinal) throws(Self.Error) {
-            guard value > .zero else { throw .zeroModulus }
+            guard value.rawValue > 0 else { throw .zeroModulus }
             self.value = value
         }
 
@@ -18,22 +17,25 @@ extension Cyclic.Group {
             self.value = value
         }
 
-        @inlinable
-        public init<Tag: ~Copyable & ~Escapable>(_ count: Index<Tag>.Count) throws(Self.Error) {
-            guard count > .zero else { throw .zeroModulus }
-            self.value = count.underlying
-        }
+    }
+}
 
-        @inlinable
-        public init<Tag: ~Copyable & ~Escapable>(__unchecked count: Index<Tag>.Count) {
-            self.value = count.underlying
-        }
+extension Cyclic.Group.Modulus {
+
+    @inlinable
+    public static func == (lhs: Self, rhs: Self) -> Bool {
+        lhs.value.rawValue == rhs.value.rawValue
+    }
+
+    @inlinable
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(value.rawValue)
     }
 }
 
 extension Cyclic.Group.Modulus: CustomStringConvertible {
 
     public var description: String {
-        "Cyclic.Group.Modulus(\(value))"
+        "Cyclic.Group.Modulus(\(value.rawValue))"
     }
 }

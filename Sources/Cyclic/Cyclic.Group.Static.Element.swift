@@ -10,7 +10,7 @@ extension Cyclic.Group.Static {
         @inlinable
         public init(_ position: Ordinal) throws(Self.Error) {
             guard modulus > 0 else { throw .invalidModulus }
-            guard position < Self.order else {
+            guard position.rawValue < Self.order.rawValue else {
                 throw .outOfBounds(Int(position.rawValue))
             }
             self.position = position
@@ -24,7 +24,7 @@ extension Cyclic.Group.Static {
         @inlinable
         public init(wrapping position: Ordinal) {
             precondition(modulus > 0, "Cyclic group modulus must be positive")
-            self.position = position % Self.order
+            self.position = Ordinal(position.rawValue % Self.order.rawValue)
         }
 
     }
@@ -39,7 +39,7 @@ extension Cyclic.Group.Static.Element {
             "Cyclic group order must be positive; Cyclic.Group.Static<\(modulus)> has no elements"
         )
 
-        return try! Cardinal(modulus)
+        return Cardinal(UInt(modulus))
     }
 }
 
@@ -78,13 +78,13 @@ extension Cyclic.Group.Static.Element {
 
     @inlinable
     public func hash(into hasher: inout Hasher) {
-        hasher.combine(position)
+        hasher.combine(position.rawValue)
     }
 }
 
 extension Cyclic.Group.Static.Element: CustomStringConvertible {
 
     public var description: String {
-        "Cyclic.Group.Static<\(modulus)>.Element(\(position))"
+        "Cyclic.Group.Static<\(modulus)>.Element(\(position.rawValue))"
     }
 }

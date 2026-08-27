@@ -1,62 +1,92 @@
 public import Cardinal
-public import Index
-internal import Ordinal
+public import Ordinal
 
 extension Cyclic.Group {
 
     @inlinable
     public static func successor(_ element: Element, modulus: Modulus) -> Element {
-        let sum = element.residue + Cardinal.one
-        let reduced = sum % modulus.value
-        return Element(__unchecked: reduced)
+        Element(
+            __unchecked: Ordinal(
+                Cyclic.modularSum(
+                    element.residue.rawValue,
+                    1,
+                    modulus: modulus.value.rawValue
+                )
+            )
+        )
     }
 
     @inlinable
     public static func predecessor(_ element: Element, modulus: Modulus) -> Element {
 
-        let sum = element.residue + modulus.value.subtract.saturating(Cardinal.one)
-        let reduced = sum % modulus.value
-        return Element(__unchecked: reduced)
+        Element(
+            __unchecked: Ordinal(
+                Cyclic.modularDifference(
+                    element.residue.rawValue,
+                    1,
+                    modulus: modulus.value.rawValue
+                )
+            )
+        )
     }
 
     @inlinable
     public static func add(_ lhs: Element, _ rhs: Element, modulus: Modulus) -> Element {
-        let sum = lhs.residue + Cardinal(rhs.residue)
-        let reduced = sum % modulus.value
-        return Element(__unchecked: reduced)
+        Element(
+            __unchecked: Ordinal(
+                Cyclic.modularSum(
+                    lhs.residue.rawValue,
+                    rhs.residue.rawValue,
+                    modulus: modulus.value.rawValue
+                )
+            )
+        )
     }
 
     @inlinable
     public static func subtract(_ lhs: Element, _ rhs: Element, modulus: Modulus) -> Element {
 
-        let inverse = modulus.value.subtract.saturating(Cardinal(rhs.residue))
-        let sum = lhs.residue + inverse
-        let reduced = sum % modulus.value
-        return Element(__unchecked: reduced)
+        Element(
+            __unchecked: Ordinal(
+                Cyclic.modularDifference(
+                    lhs.residue.rawValue,
+                    rhs.residue.rawValue,
+                    modulus: modulus.value.rawValue
+                )
+            )
+        )
     }
 
     @inlinable
     public static func inverse(_ element: Element, modulus: Modulus) -> Element {
-        if element.residue == .zero { return element }
-        let inv = modulus.value.subtract.saturating(Cardinal(element.residue))
-        return Element(__unchecked: Ordinal(inv))
+        Element(
+            __unchecked: Ordinal(
+                Cyclic.modularDifference(
+                    0,
+                    element.residue.rawValue,
+                    modulus: modulus.value.rawValue
+                )
+            )
+        )
     }
 
     @inlinable
-    public static func advanced<Tag: ~Copyable & ~Escapable>(
+    public static func advanced(
         _ element: Element,
-        by offset: Index<Tag>.Offset,
+        by offset: Int,
         modulus: Modulus
     ) -> Element {
-        guard offset.vector >= .zero else {
-            let backward = Ordinal(offset.magnitude.cardinal) % modulus.value
-            let inverse = modulus.value.subtract.saturating(Cardinal(backward))
-            let sum = element.residue + inverse
-            return Element(__unchecked: sum % modulus.value)
-        }
-
-        let forward = try! Ordinal(offset.vector) % modulus.value
-        let sum = element.residue + Cardinal(forward)
-        return Element(__unchecked: sum % modulus.value)
+        let position = offset >= 0
+            ? Cyclic.modularSum(
+                element.residue.rawValue,
+                offset.magnitude,
+                modulus: modulus.value.rawValue
+            )
+            : Cyclic.modularDifference(
+                element.residue.rawValue,
+                offset.magnitude,
+                modulus: modulus.value.rawValue
+            )
+        return Element(__unchecked: Ordinal(position))
     }
 }

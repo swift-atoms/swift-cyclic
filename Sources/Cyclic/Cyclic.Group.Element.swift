@@ -1,6 +1,7 @@
-internal import Cardinal
+public import Cardinal
 public import Index
-internal import Ordinal
+public import Ordinal
+@_spi(Internal) public import Tagged
 
 extension Cyclic.Group {
 
@@ -10,7 +11,7 @@ extension Cyclic.Group {
 
         @inlinable
         public init(_ residue: Ordinal, modulus: Modulus) {
-            self.residue = residue % modulus.value
+            self.residue = Ordinal(residue.rawValue % modulus.value.rawValue)
         }
 
         @inlinable
@@ -18,9 +19,8 @@ extension Cyclic.Group {
             self.residue = residue
         }
 
-        @inlinable
         public init<Tag: ~Copyable & ~Escapable>(__unchecked index: Index<Tag>) {
-            self.residue = index.ordinal
+            self.residue = index.underlying
         }
 
     }
@@ -29,7 +29,7 @@ extension Cyclic.Group {
 extension Cyclic.Group.Element {
 
     @inlinable
-    public static var zero: Self { Self(__unchecked: .zero) }
+    public static var zero: Self { Self(__unchecked: Ordinal(0)) }
 
     @inlinable
     public static var one: Self { Self(__unchecked: Ordinal(1)) }
@@ -55,13 +55,13 @@ extension Cyclic.Group.Element {
 
     @inlinable
     public func hash(into hasher: inout Hasher) {
-        hasher.combine(residue)
+        hasher.combine(residue.rawValue)
     }
 }
 
 extension Cyclic.Group.Element: CustomStringConvertible {
 
     public var description: String {
-        "Cyclic.Group.Element(\(residue))"
+        "Cyclic.Group.Element(\(residue.rawValue))"
     }
 }
