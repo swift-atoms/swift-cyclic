@@ -1,4 +1,4 @@
-# Cyclic
+# Cyclic Primitives
 
 ![Development Status](https://img.shields.io/badge/status-active--development-blue.svg)
 
@@ -44,7 +44,7 @@ Add to your `Package.swift`:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/swift-molecules/swift-cyclic.git", branch: "main"),
+    .package(url: "https://github.com/swift-atoms/swift-cyclic.git", branch: "main"),
 ]
 ```
 
@@ -67,16 +67,16 @@ Eight library products: an umbrella, six subject-domain sub-products, and a Test
 
 | Product | Target | Purpose |
 |---------|--------|---------|
-| `Cyclic` | `Sources/Cyclic/` | Umbrella that re-exports every sub-product below. The dynamic surface (`Cyclic.Group.Element`, `Cyclic.Group.Modulus`, free-function operations), the static surface (`Cyclic.Group.Static<let N: Int>`, its `Element` + `Element.Error`, `Iterator`), `Tagged<Tag, Cyclic.Group.Static<N>.Element>` arithmetic, and an `Ordinal(_:)` conversion from a static element. The package re-exports `Cardinal`, `Comparison`, `Hash`, `Index`, `Ordinal`, `Sequence`, and `Tagged` so a single `import Cyclic` brings the full surface into scope. |
-| `Cyclic Group` | `Sources/Cyclic Group/` | The dynamic surface: `Cyclic.Group.Element`, `Cyclic.Group.Modulus`, and free-function operations. |
-| `Cyclic Group Static` | `Sources/Cyclic Group Static/` | The static surface: `Cyclic.Group.Static<let N: Int>`. |
-| `Cyclic Group Static Element` | `Sources/Cyclic Group Static Element/` | `Cyclic.Group.Static<N>.Element`, its `Element.Error`, and its `Iterator`. |
-| `Cyclic Namespace` | `Sources/Cyclic Namespace/` | The shared `Cyclic` namespace enum. |
+| `Cyclic Primitives` | `Sources/Cyclic Primitives/` | Umbrella that re-exports every sub-product below. The dynamic surface (`Cyclic.Group.Element`, `Cyclic.Group.Modulus`, free-function operations), the static surface (`Cyclic.Group.Static<let N: Int>`, its `Element` + `Element.Error`, `Iterator`), `Tagged<Tag, Cyclic.Group.Static<N>.Element>` arithmetic, and an `Ordinal(_:)` conversion from a static element. The package re-exports `Cardinal`, `Comparison`, `Hash`, `Index`, `Ordinal`, `Sequence`, and `Tagged` so a single `import Cyclic` brings the full surface into scope. |
+| `Cyclic Group Primitives` | `Sources/Cyclic Group Primitives/` | The dynamic surface: `Cyclic.Group.Element`, `Cyclic.Group.Modulus`, and free-function operations. |
+| `Cyclic Group Static Primitives` | `Sources/Cyclic Group Static Primitives/` | The static surface: `Cyclic.Group.Static<let N: Int>`. |
+| `Cyclic Group Static Element Primitives` | `Sources/Cyclic Group Static Element Primitives/` | `Cyclic.Group.Static<N>.Element`, its `Element.Error`, and its `Iterator`. |
+| `Cyclic Namespace Primitives` | `Sources/Cyclic Namespace Primitives/` | The shared `Cyclic` namespace enum. |
 | `Cyclic Standard Library Integration` | `Sources/Cyclic Standard Library Integration/` | The `Ordinal(_:)` conversion from a static element and other stdlib bridges. |
-| `Cyclic Tagged Integration` | `Sources/Cyclic Tagged Integration/` | `Tagged<Tag, Cyclic.Group.Static<N>.Element>` arithmetic. |
+| `Cyclic Primitives Tagged Integration` | `Sources/Cyclic Primitives Tagged Integration/` | `Tagged<Tag, Cyclic.Group.Static<N>.Element>` arithmetic. |
 | `Cyclic Test Support` | `Tests/Support/` | An `ExpressibleByIntegerLiteral` conformance for `Cyclic.Group.Static<N>.Element` so test sites can write `let a: Cyclic.Group.Static<5>.Element = 3` rather than `try! .init(Ordinal(3))`. Trapping; production code uses the throwing `init(_:)`. |
 
-`Cyclic` is the supported default for consumer code; the six subject-domain products above are implementation details that back the umbrella and exist to keep a narrow dependency available. `Cyclic Test Support` is the only other product intended for direct import, and only from test targets.
+`Cyclic Primitives` is the supported default for consumer code; the six subject-domain products above are implementation details that back the umbrella and exist to keep a narrow dependency available. `Cyclic Test Support` is the only other product intended for direct import, and only from test targets.
 
 Foundation-free. No platform conditionals.
 
@@ -138,19 +138,19 @@ Pre-1.0. The public API may change before 0.1.0 is tagged; consumers depending o
 
 Direct dependencies (all already-public):
 
-- [swift-comparison](https://github.com/swift-molecules/swift-comparison) — `Comparison.Protocol`, the `Comparable`-shape conformance the element types expose.
-- [swift-hash](https://github.com/swift-molecules/swift-hash) — `Hash.Protocol`, the `Hashable`-shape conformance the element types expose.
-- [swift-tagged](https://github.com/swift-molecules/swift-tagged) — `Tagged<Tag, Underlying>`, the phantom-tagging machinery `Tagged<Tag, Cyclic.Group.Static<N>.Element>` is built on.
-- [swift-ordinal](https://github.com/swift-molecules/swift-ordinal) — `Ordinal`, the non-negative position type both element surfaces store.
-- [swift-cardinal](https://github.com/swift-molecules/swift-cardinal) — `Cardinal`, the non-negative count type `Modulus` wraps.
-- [swift-index](https://github.com/swift-molecules/swift-index) — `Index<Tag>`, `Index<Tag>.Count`, `Index<Tag>.Offset`, the typed-indexing surface the public-API constructors and `advanced(_:by:modulus:)` consume.
-- [swift-sequence](https://github.com/swift-molecules/swift-sequence) — `Sequence.Protocol` and `Sequence.Iterator.Protocol`, the iterator family `Cyclic.Group.Static.Iterator` conforms to.
+- [swift-comparison](https://github.com/swift-atoms/swift-comparison) — `Comparison.Protocol`, the `Comparable`-shape conformance the element types expose.
+- [swift-hash](https://github.com/swift-atoms/swift-hash) — `Hash.Protocol`, the `Hashable`-shape conformance the element types expose.
+- [swift-tagged](https://github.com/swift-atoms/swift-tagged) — `Tagged<Tag, Underlying>`, the phantom-tagging machinery `Tagged<Tag, Cyclic.Group.Static<N>.Element>` is built on.
+- [swift-ordinal](https://github.com/swift-atoms/swift-ordinal) — `Ordinal`, the non-negative position type both element surfaces store.
+- [swift-cardinal](https://github.com/swift-atoms/swift-cardinal) — `Cardinal`, the non-negative count type `Modulus` wraps.
+- [swift-index](https://github.com/swift-atoms/swift-index) — `Index<Tag>`, `Index<Tag>.Count`, `Index<Tag>.Offset`, the typed-indexing surface the public-API constructors and `advanced(_:by:modulus:)` consume.
+- [swift-sequence](https://github.com/swift-atoms/swift-sequence) — `Sequence.Protocol` and `Sequence.Iterator.Protocol`, the iterator family `Cyclic.Group.Static.Iterator` conforms to.
 
 Cohort siblings (Story 2 — Typed indexing and sequences):
 
 - order, index, sequence, collection, input, **cyclic**, vector — see [`data-structures-launch-2026`](https://github.com/swift-institute) for the cohort narrative.
 
-Story 1 sibling primitives ([`cardinal`](https://github.com/swift-molecules/swift-cardinal), [`ordinal`](https://github.com/swift-molecules/swift-ordinal), [`affine`](https://github.com/swift-molecules/swift-affine)) shipped 2026-05-12 and supply the counting / position / displacement primitives the dynamic and static surfaces are built on.
+Story 1 sibling primitives ([`cardinal`](https://github.com/swift-atoms/swift-cardinal), [`ordinal`](https://github.com/swift-atoms/swift-ordinal), [`affine`](https://github.com/swift-atoms/swift-affine)) shipped 2026-05-12 and supply the counting / position / displacement primitives the dynamic and static surfaces are built on.
 
 ---
 
