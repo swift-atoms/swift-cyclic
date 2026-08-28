@@ -1,4 +1,6 @@
 public import Cardinal
+public import Cyclic_Group_Static
+public import Cyclic_Namespace
 public import Ordinal
 
 extension Cyclic.Group.Static {
@@ -10,7 +12,7 @@ extension Cyclic.Group.Static {
         @inlinable
         public init(_ position: Ordinal) throws(Self.Error) {
             guard modulus > 0 else { throw .invalidModulus }
-            guard position.rawValue < Self.order.rawValue else {
+            guard position < Self.order else {
                 throw .outOfBounds(Int(position.rawValue))
             }
             self.position = position
@@ -24,7 +26,7 @@ extension Cyclic.Group.Static {
         @inlinable
         public init(wrapping position: Ordinal) {
             precondition(modulus > 0, "Cyclic group modulus must be positive")
-            self.position = Ordinal(position.rawValue % Self.order.rawValue)
+            self.position = position % Self.order
         }
 
     }
@@ -39,7 +41,7 @@ extension Cyclic.Group.Static.Element {
             "Cyclic group order must be positive; Cyclic.Group.Static<\(modulus)> has no elements"
         )
 
-        return Cardinal(UInt(modulus))
+        return try! Cardinal(modulus)
     }
 }
 
@@ -78,13 +80,13 @@ extension Cyclic.Group.Static.Element {
 
     @inlinable
     public func hash(into hasher: inout Hasher) {
-        hasher.combine(position.rawValue)
+        hasher.combine(position)
     }
 }
 
 extension Cyclic.Group.Static.Element: CustomStringConvertible {
 
     public var description: String {
-        "Cyclic.Group.Static<\(modulus)>.Element(\(position.rawValue))"
+        "Cyclic.Group.Static<\(modulus)>.Element(\(position))"
     }
 }

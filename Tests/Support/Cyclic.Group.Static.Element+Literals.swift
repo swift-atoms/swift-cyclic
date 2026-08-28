@@ -1,5 +1,4 @@
 public import Cyclic
-import Ordinal
 
 extension Cyclic.Group.Static.Element: ExpressibleByIntegerLiteral {
 

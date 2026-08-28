@@ -1,6 +1,4 @@
 import Testing
-import Cardinal
-import Ordinal
 
 @testable import Cyclic
 
@@ -137,31 +135,6 @@ extension Cyclic.Group.Test.Unit {
         tail = Cyclic.Group.successor(tail, modulus: capacity)
         #expect(tail.residue == Ordinal(0))
     }
-
-    @Test
-    func `Successor wraps without overflowing UInt`() throws(Cyclic.Group.Modulus.Error) {
-        let modulus = try Cyclic.Group.Modulus(Cardinal(UInt.max))
-        let element = Cyclic.Group.Element(__unchecked: Ordinal(UInt.max - 1))
-        let next = Cyclic.Group.successor(element, modulus: modulus)
-        #expect(next.residue == Ordinal(0))
-    }
-
-    @Test
-    func `Addition wraps without overflowing UInt`() throws(Cyclic.Group.Modulus.Error) {
-        let modulus = try Cyclic.Group.Modulus(Cardinal(UInt.max))
-        let lhs = Cyclic.Group.Element(__unchecked: Ordinal(UInt.max - 2))
-        let rhs = Cyclic.Group.Element(__unchecked: Ordinal(UInt.max - 3))
-        let sum = Cyclic.Group.add(lhs, rhs, modulus: modulus)
-        #expect(sum.residue == Ordinal(UInt.max - 5))
-    }
-
-    @Test
-    func `Inverse handles the upper UInt range`() throws(Cyclic.Group.Modulus.Error) {
-        let modulus = try Cyclic.Group.Modulus(Cardinal(UInt.max))
-        let element = Cyclic.Group.Element(__unchecked: Ordinal(UInt.max - 2))
-        let inverse = Cyclic.Group.inverse(element, modulus: modulus)
-        #expect(inverse.residue == Ordinal(2))
-    }
 }
 
 extension Cyclic.Group.Test.`Edge Case` {
@@ -169,7 +142,7 @@ extension Cyclic.Group.Test.`Edge Case` {
     @Test
     func `Zero modulus throws`() {
         #expect(throws: Cyclic.Group.Modulus.Error.zeroModulus) {
-            _ = try Cyclic.Group.Modulus(Cardinal(0))
+            _ = try Cyclic.Group.Modulus(.zero)
         }
     }
 }

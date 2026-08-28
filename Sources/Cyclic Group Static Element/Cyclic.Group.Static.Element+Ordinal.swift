@@ -1,3 +1,5 @@
+public import Cyclic_Group_Static
+public import Cyclic_Namespace
 public import Ordinal
 
 extension Ordinal {

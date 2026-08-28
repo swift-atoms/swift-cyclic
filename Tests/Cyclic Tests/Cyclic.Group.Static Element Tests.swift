@@ -1,9 +1,7 @@
+import Cyclic_Test_Support
 import Testing
-import Cardinal
-import Ordinal
 
 @testable import Cyclic
-import Cyclic_Test_Support
 
 extension Cyclic.Group {
     @Suite
@@ -20,22 +18,22 @@ extension Cyclic.Group.`Static Element Test`.Unit {
     @Test
     func `Valid construction via throwing init`() throws(Cyclic.Group.Static<5>.Element.Error) {
         let g0 = try Cyclic.Group.Static<5>.Element(Ordinal(0))
-        #expect(g0.position == Ordinal(0))
+        #expect(g0.position == 0)
 
         let g4 = try Cyclic.Group.Static<5>.Element(Ordinal(4))
-        #expect(g4.position == Ordinal(4))
+        #expect(g4.position == 4)
     }
 
     @Test
     func `Zero is identity`() {
         let zero = Cyclic.Group.Static<5>.Element.zero
-        #expect(zero.position == Ordinal(0))
+        #expect(zero.position == 0)
     }
 
     @Test
     func `One is generator`() {
         let one = Cyclic.Group.Static<5>.Element.one
-        #expect(one.position == Ordinal(1))
+        #expect(one.position == 1)
     }
 
     @Test
@@ -43,7 +41,7 @@ extension Cyclic.Group.`Static Element Test`.Unit {
         let one = Cyclic.Group.Static<1>.Element.one
         let zero = Cyclic.Group.Static<1>.Element.zero
         #expect(one == zero)
-        #expect(one.position == Ordinal(0))
+        #expect(one.position == 0)
     }
 
     @Test
@@ -51,7 +49,7 @@ extension Cyclic.Group.`Static Element Test`.Unit {
         let a: Cyclic.Group.Static<10>.Element = 3
         let b: Cyclic.Group.Static<10>.Element = 4
         let sum = a + b
-        #expect(sum.position == Ordinal(7))
+        #expect(sum.position == 7)
     }
 
     @Test
@@ -59,7 +57,7 @@ extension Cyclic.Group.`Static Element Test`.Unit {
         let a: Cyclic.Group.Static<5>.Element = 4
         let b: Cyclic.Group.Static<5>.Element = 3
         let sum = a + b
-        #expect(sum.position == Ordinal(2))
+        #expect(sum.position == 2)
     }
 
     @Test
@@ -74,7 +72,7 @@ extension Cyclic.Group.`Static Element Test`.Unit {
         let a: Cyclic.Group.Static<10>.Element = 7
         let b: Cyclic.Group.Static<10>.Element = 3
         let diff = a - b
-        #expect(diff.position == Ordinal(4))
+        #expect(diff.position == 4)
     }
 
     @Test
@@ -82,7 +80,7 @@ extension Cyclic.Group.`Static Element Test`.Unit {
         let a: Cyclic.Group.Static<5>.Element = 1
         let b: Cyclic.Group.Static<5>.Element = 3
         let diff = a - b
-        #expect(diff.position == Ordinal(3))
+        #expect(diff.position == 3)
     }
 
     @Test
@@ -103,18 +101,18 @@ extension Cyclic.Group.`Static Element Test`.Unit {
     func `Compound addition`() {
         var g: Cyclic.Group.Static<5>.Element = 3
         g += .one
-        #expect(g.position == Ordinal(4))
+        #expect(g.position == 4)
         g += .one
-        #expect(g.position == Ordinal(0))
+        #expect(g.position == 0)
     }
 
     @Test
     func `Compound subtraction`() {
         var g: Cyclic.Group.Static<5>.Element = 1
         g -= .one
-        #expect(g.position == Ordinal(0))
+        #expect(g.position == 0)
         g -= .one
-        #expect(g.position == Ordinal(4))
+        #expect(g.position == 4)
     }
 
     @Test
@@ -122,16 +120,16 @@ extension Cyclic.Group.`Static Element Test`.Unit {
         var tail = Cyclic.Group.Static<4>.Element.zero
 
         tail += .one
-        #expect(tail.position == Ordinal(1))
+        #expect(tail.position == 1)
 
         tail += .one
-        #expect(tail.position == Ordinal(2))
+        #expect(tail.position == 2)
 
         tail += .one
-        #expect(tail.position == Ordinal(3))
+        #expect(tail.position == 3)
 
         tail += .one
-        #expect(tail.position == Ordinal(0))
+        #expect(tail.position == 0)
     }
 
     @Test
@@ -175,7 +173,7 @@ extension Cyclic.Group.`Static Element Test`.`Edge Case` {
         let a: Cyclic.Group.Static<5>.Element = 0
         let b: Cyclic.Group.Static<5>.Element = 1
         let diff = a - b
-        #expect(diff.position == Ordinal(4))
+        #expect(diff.position == 4)
     }
 
     @Test
@@ -211,8 +209,8 @@ extension Cyclic.Group.`Static Element Test`.`Edge Case` {
     @Test
     func `Order one arithmetic never touches the guard`() {
         let zero = Cyclic.Group.Static<1>.Element.zero
-        #expect((zero + zero).position == Ordinal(0))
-        #expect((zero - zero).position == Ordinal(0))
-        #expect(Cyclic.Group.Static<1>.Element.order == Cardinal(1))
+        #expect((zero + zero).position == 0)
+        #expect((zero - zero).position == 0)
+        #expect(Cyclic.Group.Static<1>.Element.order == 1)
     }
 }
