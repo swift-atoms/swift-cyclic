@@ -1,6 +1,11 @@
+import Cardinal
+import Cardinal_Standard_Library_Integration
+import Cyclic
+import Ordinal
+import Ordinal_Standard_Library_Integration
 import Testing
 
-@testable import Cyclic
+@testable import Cyclic_Group
 
 extension Cyclic.Group {
     @Suite
@@ -142,7 +147,7 @@ extension Cyclic.Group.Test.`Edge Case` {
     @Test
     func `Zero modulus throws`() {
         #expect(throws: Cyclic.Group.Modulus.Error.zeroModulus) {
-            _ = try Cyclic.Group.Modulus(.zero)
+            _ = try Cyclic.Group.Modulus(Cardinal::Cardinal(UInt.zero))
         }
     }
 }

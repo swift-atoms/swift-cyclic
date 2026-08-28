@@ -1,38 +1,34 @@
 public import Cardinal
-public import Cyclic_Namespace
-public import Index
+public import Cyclic
 
-extension Cyclic.Group {
+extension Cyclic::Cyclic.Group {
 
-    public struct Modulus: Hashable, Sendable {
+    public struct Modulus: Equatable, Sendable {
 
-        public let value: Cardinal
+        public let value: Cardinal::Cardinal
 
         @inlinable
-        public init(_ value: Cardinal) throws(Self.Error) {
-            guard value > .zero else { throw .zeroModulus }
+        public init(_ value: Cardinal::Cardinal) throws(Self.Error) {
+            guard value.rawValue > 0 else { throw .zeroModulus }
             self.value = value
         }
 
         @inlinable
-        public init(__unchecked value: Cardinal) {
+        public init(__unchecked value: Cardinal::Cardinal) {
             self.value = value
-        }
-
-        @inlinable
-        public init<Tag: ~Copyable & ~Escapable>(_ count: Index<Tag>.Count) throws(Self.Error) {
-            guard count > .zero else { throw .zeroModulus }
-            self.value = count.underlying
-        }
-
-        @inlinable
-        public init<Tag: ~Copyable & ~Escapable>(__unchecked count: Index<Tag>.Count) {
-            self.value = count.underlying
         }
     }
 }
 
-extension Cyclic.Group.Modulus: CustomStringConvertible {
+extension Cyclic::Cyclic.Group.Modulus {
+
+    @inlinable
+    public static func == (lhs: Self, rhs: Self) -> Bool {
+        lhs.value.rawValue == rhs.value.rawValue
+    }
+}
+
+extension Cyclic::Cyclic.Group.Modulus: CustomStringConvertible {
 
     public var description: String {
         "Cyclic.Group.Modulus(\(value))"

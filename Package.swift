@@ -26,19 +26,6 @@ let package = Package(
             targets: ["Cyclic Group Static"]
         ),
         .library(
-            name: "Cyclic Namespace",
-            targets: ["Cyclic Namespace"]
-        ),
-        .library(
-            name: "Cyclic Standard Library Integration",
-            targets: ["Cyclic Standard Library Integration"]
-        ),
-        .library(
-            name: "Cyclic Tagged Integration",
-            targets: ["Cyclic Tagged Integration"]
-        ),
-
-        .library(
             name: "Cyclic",
             targets: ["Cyclic"]
         ),
@@ -50,18 +37,6 @@ let package = Package(
     ],
     dependencies: [
         .package(
-            url: "https://github.com/swift-atoms/swift-comparison.git",
-            branch: "main"
-        ),
-        .package(
-            url: "https://github.com/swift-atoms/swift-hash.git",
-            branch: "main"
-        ),
-        .package(
-            url: "https://github.com/swift-atoms/swift-tagged.git",
-            branch: "main"
-        ),
-        .package(
             url: "https://github.com/swift-atoms/swift-ordinal.git",
             branch: "main"
         ),
@@ -69,29 +44,25 @@ let package = Package(
             url: "https://github.com/swift-atoms/swift-cardinal.git",
             branch: "main"
         ),
-        .package(
-            url: "https://github.com/swift-atoms/swift-index.git",
-            branch: "main"
-        ),
     ],
     targets: [
 
         .target(
-            name: "Cyclic Namespace"
+            name: "Cyclic"
         ),
 
         .target(
             name: "Cyclic Group Static",
             dependencies: [
-                .target(name: "Cyclic Namespace")
+                .target(name: "Cyclic")
             ]
         ),
 
         .target(
             name: "Cyclic Group Static Element",
             dependencies: [
+                .target(name: "Cyclic"),
                 .target(name: "Cyclic Group Static"),
-                .target(name: "Cyclic Namespace"),
                 .product(name: "Cardinal", package: "swift-cardinal"),
                 .product(name: "Ordinal", package: "swift-ordinal"),
             ]
@@ -100,53 +71,40 @@ let package = Package(
         .target(
             name: "Cyclic Group",
             dependencies: [
-                .target(name: "Cyclic Namespace"),
+                .target(name: "Cyclic"),
                 .product(name: "Cardinal", package: "swift-cardinal"),
-                .product(name: "Index", package: "swift-index"),
                 .product(name: "Ordinal", package: "swift-ordinal"),
-            ]
-        ),
-
-        .target(
-            name: "Cyclic Standard Library Integration",
-            dependencies: [
-                .target(name: "Cyclic Group Static Element"),
-                .product(name: "Comparison", package: "swift-comparison"),
-                .product(name: "Hash", package: "swift-hash"),
-            ]
-        ),
-
-        .target(
-            name: "Cyclic Tagged Integration",
-            dependencies: [
-                .target(name: "Cyclic Group Static Element"),
-                .product(name: "Ordinal", package: "swift-ordinal"),
-                .product(name: "Tagged", package: "swift-tagged"),
-            ]
-        ),
-
-        .target(
-            name: "Cyclic",
-            dependencies: [
-                .target(name: "Cyclic Group"),
-                .target(name: "Cyclic Group Static Element"),
-                .target(name: "Cyclic Group Static"),
-                .target(name: "Cyclic Namespace"),
-                .target(name: "Cyclic Standard Library Integration"),
-                .target(name: "Cyclic Tagged Integration"),
             ]
         ),
 
         .target(
             name: "Cyclic Test Support",
-            dependencies: [.target(name: "Cyclic")],
+            dependencies: [
+                .target(name: "Cyclic"),
+                .target(name: "Cyclic Group Static"),
+                .target(name: "Cyclic Group Static Element"),
+                .product(name: "Ordinal", package: "swift-ordinal"),
+            ],
             path: "Tests/Support"
         ),
         .testTarget(
             name: "Cyclic Tests",
             dependencies: [
                 .target(name: "Cyclic"),
+                .target(name: "Cyclic Group"),
+                .target(name: "Cyclic Group Static"),
+                .target(name: "Cyclic Group Static Element"),
                 .target(name: "Cyclic Test Support"),
+                .product(name: "Cardinal", package: "swift-cardinal"),
+                .product(
+                    name: "Cardinal Standard Library Integration",
+                    package: "swift-cardinal"
+                ),
+                .product(name: "Ordinal", package: "swift-ordinal"),
+                .product(
+                    name: "Ordinal Standard Library Integration",
+                    package: "swift-ordinal"
+                ),
             ]
         ),
     ],

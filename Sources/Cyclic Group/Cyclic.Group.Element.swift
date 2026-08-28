@@ -1,42 +1,36 @@
-internal import Cardinal
-public import Cyclic_Namespace
-public import Index
-internal import Ordinal
+public import Cardinal
+public import Cyclic
+public import Ordinal
 
-extension Cyclic.Group {
+extension Cyclic::Cyclic.Group {
 
-    public struct Element: Hashable, Comparable, Sendable {
+    public struct Element: Comparable, Sendable {
 
-        public let residue: Ordinal
+        public let residue: Ordinal::Ordinal
 
         @inlinable
-        public init(_ residue: Ordinal, modulus: Modulus) {
-            self.residue = residue % modulus.value
+        public init(_ residue: Ordinal::Ordinal, modulus: Modulus) {
+            self.residue = Ordinal::Ordinal(residue.rawValue % modulus.value.rawValue)
         }
 
         @inlinable
-        public init(__unchecked residue: Ordinal) {
+        public init(__unchecked residue: Ordinal::Ordinal) {
             self.residue = residue
-        }
-
-        @inlinable
-        public init<Tag: ~Copyable & ~Escapable>(__unchecked index: Index<Tag>) {
-            self.residue = index.ordinal
         }
 
     }
 }
 
-extension Cyclic.Group.Element {
+extension Cyclic::Cyclic.Group.Element {
 
     @inlinable
     public static var zero: Self { Self(__unchecked: .zero) }
 
     @inlinable
-    public static var one: Self { Self(__unchecked: Ordinal(1)) }
+    public static var one: Self { Self(__unchecked: Ordinal::Ordinal(1 as UInt)) }
 }
 
-extension Cyclic.Group.Element {
+extension Cyclic::Cyclic.Group.Element {
 
     @inlinable
     public static func == (lhs: Self, rhs: Self) -> Bool {
@@ -44,7 +38,7 @@ extension Cyclic.Group.Element {
     }
 }
 
-extension Cyclic.Group.Element {
+extension Cyclic::Cyclic.Group.Element {
 
     @inlinable
     public static func < (lhs: Self, rhs: Self) -> Bool {
@@ -52,15 +46,7 @@ extension Cyclic.Group.Element {
     }
 }
 
-extension Cyclic.Group.Element {
-
-    @inlinable
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(residue)
-    }
-}
-
-extension Cyclic.Group.Element: CustomStringConvertible {
+extension Cyclic::Cyclic.Group.Element: CustomStringConvertible {
 
     public var description: String {
         "Cyclic.Group.Element(\(residue))"
