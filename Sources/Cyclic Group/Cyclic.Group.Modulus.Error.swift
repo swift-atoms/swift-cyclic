@@ -1,6 +1,6 @@
-public import Cyclic_Namespace
+public import Cyclic
 
-extension Cyclic.Group.Modulus {
+extension Cyclic::Cyclic.Group.Modulus {
 
     public enum Error: Swift.Error, Hashable, Sendable {
 

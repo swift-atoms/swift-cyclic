@@ -1,51 +1,51 @@
 public import Cardinal
+public import Cyclic
 public import Cyclic_Group_Static
-public import Cyclic_Namespace
 public import Ordinal
 
-extension Cyclic.Group.Static {
+extension Cyclic::Cyclic.Group.Static {
 
-    public struct Element: Hashable, Comparable, Sendable {
+    public struct Element: Comparable, Sendable {
 
-        public let position: Ordinal
+        public let position: Ordinal::Ordinal
 
         @inlinable
-        public init(_ position: Ordinal) throws(Self.Error) {
+        public init(_ position: Ordinal::Ordinal) throws(Self.Error) {
             guard modulus > 0 else { throw .invalidModulus }
-            guard position < Self.order else {
+            guard position.rawValue < Self.order.rawValue else {
                 throw .outOfBounds(Int(position.rawValue))
             }
             self.position = position
         }
 
         @inlinable
-        public init(__unchecked position: Ordinal) {
+        public init(__unchecked position: Ordinal::Ordinal) {
             self.position = position
         }
 
         @inlinable
-        public init(wrapping position: Ordinal) {
+        public init(wrapping position: Ordinal::Ordinal) {
             precondition(modulus > 0, "Cyclic group modulus must be positive")
-            self.position = position % Self.order
+            self.position = Ordinal::Ordinal(position.rawValue % Self.order.rawValue)
         }
 
     }
 }
 
-extension Cyclic.Group.Static.Element {
+extension Cyclic::Cyclic.Group.Static.Element {
 
     @inlinable
-    public static var order: Cardinal {
+    public static var order: Cardinal::Cardinal {
         precondition(
             modulus > 0,
             "Cyclic group order must be positive; Cyclic.Group.Static<\(modulus)> has no elements"
         )
 
-        return try! Cardinal(modulus)
+        return Cardinal::Cardinal(UInt(modulus))
     }
 }
 
-extension Cyclic.Group.Static.Element {
+extension Cyclic::Cyclic.Group.Static.Element {
 
     @inlinable
     public static func == (lhs: Self, rhs: Self) -> Bool {
@@ -53,7 +53,7 @@ extension Cyclic.Group.Static.Element {
     }
 }
 
-extension Cyclic.Group.Static.Element {
+extension Cyclic::Cyclic.Group.Static.Element {
 
     @inlinable
     public static func < (lhs: Self, rhs: Self) -> Bool {
@@ -76,15 +76,7 @@ extension Cyclic.Group.Static.Element {
     }
 }
 
-extension Cyclic.Group.Static.Element {
-
-    @inlinable
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(position)
-    }
-}
-
-extension Cyclic.Group.Static.Element: CustomStringConvertible {
+extension Cyclic::Cyclic.Group.Static.Element: CustomStringConvertible {
 
     public var description: String {
         "Cyclic.Group.Static<\(modulus)>.Element(\(position))"

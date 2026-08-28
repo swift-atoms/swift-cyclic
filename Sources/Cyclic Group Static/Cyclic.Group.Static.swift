@@ -1,6 +1,6 @@
-public import Cyclic_Namespace
+public import Cyclic
 
-extension Cyclic.Group {
+extension Cyclic::Cyclic.Group {
 
     public struct Static<let modulus: Int>: Sendable {
 
