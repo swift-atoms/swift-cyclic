@@ -4,7 +4,7 @@ public import Ordinal
 
 extension Cyclic::Cyclic.Group {
 
-    public struct Element: Comparable, Sendable {
+    public struct Element: Hashable, Comparable, Sendable {
 
         public let residue: Ordinal::Ordinal
 
@@ -43,6 +43,14 @@ extension Cyclic::Cyclic.Group.Element {
     @inlinable
     public static func < (lhs: Self, rhs: Self) -> Bool {
         lhs.residue < rhs.residue
+    }
+}
+
+extension Cyclic::Cyclic.Group.Element {
+
+    @inlinable
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(residue.rawValue)
     }
 }
 

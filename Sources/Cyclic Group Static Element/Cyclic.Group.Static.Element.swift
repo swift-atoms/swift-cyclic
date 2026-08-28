@@ -5,7 +5,7 @@ public import Ordinal
 
 extension Cyclic::Cyclic.Group.Static {
 
-    public struct Element: Comparable, Sendable {
+    public struct Element: Hashable, Comparable, Sendable {
 
         public let position: Ordinal::Ordinal
 
@@ -73,6 +73,14 @@ extension Cyclic::Cyclic.Group.Static.Element {
     @inlinable
     public static func >= (lhs: Self, rhs: Self) -> Bool {
         lhs.position >= rhs.position
+    }
+}
+
+extension Cyclic::Cyclic.Group.Static.Element {
+
+    @inlinable
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(position.rawValue)
     }
 }
 

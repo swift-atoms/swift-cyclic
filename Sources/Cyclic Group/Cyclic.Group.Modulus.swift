@@ -3,7 +3,7 @@ public import Cyclic
 
 extension Cyclic::Cyclic.Group {
 
-    public struct Modulus: Equatable, Sendable {
+    public struct Modulus: Hashable, Sendable {
 
         public let value: Cardinal::Cardinal
 
@@ -25,6 +25,14 @@ extension Cyclic::Cyclic.Group.Modulus {
     @inlinable
     public static func == (lhs: Self, rhs: Self) -> Bool {
         lhs.value.rawValue == rhs.value.rawValue
+    }
+}
+
+extension Cyclic::Cyclic.Group.Modulus {
+
+    @inlinable
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(value.rawValue)
     }
 }
 

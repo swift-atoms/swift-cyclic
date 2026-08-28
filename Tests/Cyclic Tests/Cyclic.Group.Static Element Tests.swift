@@ -148,6 +148,15 @@ extension Cyclic.Group.`Static Element Test`.Unit {
     }
 
     @Test
+    func `Static elements are intrinsically hashable`() {
+        let a: Cyclic.Group.Static<5>.Element = 2
+        let b: Cyclic.Group.Static<5>.Element = 2
+        let values: Set = [a, b]
+
+        #expect(values.count == 1)
+    }
+
+    @Test
     func `Modulus property`() {
         #expect(Cyclic.Group.Static<7>.modulus == 7)
         #expect(Cyclic.Group.Static<1>.modulus == 1)

@@ -40,6 +40,19 @@ extension Cyclic.Group.Test.Unit {
     }
 
     @Test
+    func `Element and Modulus are intrinsically hashable`() throws(Cyclic.Group.Modulus.Error) {
+        let modulus = try Cyclic.Group.Modulus(Cardinal(5))
+        let elements: Set = [
+            Cyclic.Group.Element(Ordinal(2), modulus: modulus),
+            Cyclic.Group.Element(Ordinal(7), modulus: modulus),
+        ]
+        let moduli: Set = [modulus, try Cyclic.Group.Modulus(Cardinal(5))]
+
+        #expect(elements.count == 1)
+        #expect(moduli.count == 1)
+    }
+
+    @Test
     func `Successor without wrap`() throws(Cyclic.Group.Modulus.Error) {
         let modulus = try Cyclic.Group.Modulus(Cardinal(5))
         let element = Cyclic.Group.Element(__unchecked: Ordinal(2))
