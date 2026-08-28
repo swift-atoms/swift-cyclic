@@ -1,4 +1,4 @@
-public import Cyclic_Primitives
+public import Cyclic
 
 extension Cyclic.Group.Static.Element: ExpressibleByIntegerLiteral {
 

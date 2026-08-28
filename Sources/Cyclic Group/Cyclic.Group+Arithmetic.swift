@@ -1,7 +1,7 @@
-public import Cardinal_Primitives
-public import Cyclic_Namespace_Primitives
-public import Index_Primitives
-internal import Ordinal_Primitives
+public import Cardinal
+public import Cyclic_Namespace
+public import Index
+internal import Ordinal
 
 extension Cyclic.Group {
 

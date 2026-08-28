@@ -1,4 +1,4 @@
-public import Cyclic_Namespace_Primitives
+public import Cyclic_Namespace
 
 extension Cyclic.Group {
 

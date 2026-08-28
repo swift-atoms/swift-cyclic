@@ -3,7 +3,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "swift-cyclic-primitives",
+    name: "swift-cyclic",
     platforms: [
         .macOS(.v27),
         .iOS(.v27),
@@ -14,139 +14,139 @@ let package = Package(
     products: [
 
         .library(
-            name: "Cyclic Group Primitives",
-            targets: ["Cyclic Group Primitives"]
+            name: "Cyclic Group",
+            targets: ["Cyclic Group"]
         ),
         .library(
-            name: "Cyclic Group Static Element Primitives",
-            targets: ["Cyclic Group Static Element Primitives"]
+            name: "Cyclic Group Static Element",
+            targets: ["Cyclic Group Static Element"]
         ),
         .library(
-            name: "Cyclic Group Static Primitives",
-            targets: ["Cyclic Group Static Primitives"]
+            name: "Cyclic Group Static",
+            targets: ["Cyclic Group Static"]
         ),
         .library(
-            name: "Cyclic Namespace Primitives",
-            targets: ["Cyclic Namespace Primitives"]
+            name: "Cyclic Namespace",
+            targets: ["Cyclic Namespace"]
         ),
         .library(
-            name: "Cyclic Primitives Standard Library Integration",
-            targets: ["Cyclic Primitives Standard Library Integration"]
+            name: "Cyclic Standard Library Integration",
+            targets: ["Cyclic Standard Library Integration"]
         ),
         .library(
-            name: "Cyclic Primitives Tagged Integration",
-            targets: ["Cyclic Primitives Tagged Integration"]
-        ),
-
-        .library(
-            name: "Cyclic Primitives",
-            targets: ["Cyclic Primitives"]
+            name: "Cyclic Tagged Integration",
+            targets: ["Cyclic Tagged Integration"]
         ),
 
         .library(
-            name: "Cyclic Primitives Test Support",
-            targets: ["Cyclic Primitives Test Support"]
+            name: "Cyclic",
+            targets: ["Cyclic"]
+        ),
+
+        .library(
+            name: "Cyclic Test Support",
+            targets: ["Cyclic Test Support"]
         ),
     ],
     dependencies: [
         .package(
-            url: "https://github.com/swift-primitives/swift-comparison-primitives.git",
+            url: "https://github.com/swift-atoms/swift-comparison.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-hash-primitives.git",
+            url: "https://github.com/swift-atoms/swift-hash.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-tagged-primitives.git",
+            url: "https://github.com/swift-atoms/swift-tagged.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-ordinal-primitives.git",
+            url: "https://github.com/swift-atoms/swift-ordinal.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-cardinal-primitives.git",
+            url: "https://github.com/swift-atoms/swift-cardinal.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-index-primitives.git",
+            url: "https://github.com/swift-atoms/swift-index.git",
             branch: "main"
         ),
     ],
     targets: [
 
         .target(
-            name: "Cyclic Namespace Primitives"
+            name: "Cyclic Namespace"
         ),
 
         .target(
-            name: "Cyclic Group Static Primitives",
+            name: "Cyclic Group Static",
             dependencies: [
-                "Cyclic Namespace Primitives"
+                .target(name: "Cyclic Namespace")
             ]
         ),
 
         .target(
-            name: "Cyclic Group Static Element Primitives",
+            name: "Cyclic Group Static Element",
             dependencies: [
-                "Cyclic Group Static Primitives",
-                "Cyclic Namespace Primitives",
-                .product(name: "Cardinal Primitives", package: "swift-cardinal-primitives"),
-                .product(name: "Ordinal Primitives", package: "swift-ordinal-primitives"),
+                .target(name: "Cyclic Group Static"),
+                .target(name: "Cyclic Namespace"),
+                .product(name: "Cardinal", package: "swift-cardinal"),
+                .product(name: "Ordinal", package: "swift-ordinal"),
             ]
         ),
 
         .target(
-            name: "Cyclic Group Primitives",
+            name: "Cyclic Group",
             dependencies: [
-                "Cyclic Namespace Primitives",
-                .product(name: "Cardinal Primitives", package: "swift-cardinal-primitives"),
-                .product(name: "Index Primitives", package: "swift-index-primitives"),
-                .product(name: "Ordinal Primitives", package: "swift-ordinal-primitives"),
+                .target(name: "Cyclic Namespace"),
+                .product(name: "Cardinal", package: "swift-cardinal"),
+                .product(name: "Index", package: "swift-index"),
+                .product(name: "Ordinal", package: "swift-ordinal"),
             ]
         ),
 
         .target(
-            name: "Cyclic Primitives Standard Library Integration",
+            name: "Cyclic Standard Library Integration",
             dependencies: [
-                "Cyclic Group Static Element Primitives",
-                .product(name: "Comparison Primitives", package: "swift-comparison-primitives"),
-                .product(name: "Hash Primitives", package: "swift-hash-primitives"),
+                .target(name: "Cyclic Group Static Element"),
+                .product(name: "Comparison", package: "swift-comparison"),
+                .product(name: "Hash", package: "swift-hash"),
             ]
         ),
 
         .target(
-            name: "Cyclic Primitives Tagged Integration",
+            name: "Cyclic Tagged Integration",
             dependencies: [
-                "Cyclic Group Static Element Primitives",
-                .product(name: "Ordinal Primitives", package: "swift-ordinal-primitives"),
-                .product(name: "Tagged Primitives", package: "swift-tagged-primitives"),
+                .target(name: "Cyclic Group Static Element"),
+                .product(name: "Ordinal", package: "swift-ordinal"),
+                .product(name: "Tagged", package: "swift-tagged"),
             ]
         ),
 
         .target(
-            name: "Cyclic Primitives",
+            name: "Cyclic",
             dependencies: [
-                "Cyclic Group Primitives",
-                "Cyclic Group Static Element Primitives",
-                "Cyclic Group Static Primitives",
-                "Cyclic Namespace Primitives",
-                "Cyclic Primitives Standard Library Integration",
-                "Cyclic Primitives Tagged Integration",
+                .target(name: "Cyclic Group"),
+                .target(name: "Cyclic Group Static Element"),
+                .target(name: "Cyclic Group Static"),
+                .target(name: "Cyclic Namespace"),
+                .target(name: "Cyclic Standard Library Integration"),
+                .target(name: "Cyclic Tagged Integration"),
             ]
         ),
 
         .target(
-            name: "Cyclic Primitives Test Support",
-            dependencies: ["Cyclic Primitives"],
+            name: "Cyclic Test Support",
+            dependencies: [.target(name: "Cyclic")],
             path: "Tests/Support"
         ),
         .testTarget(
-            name: "Cyclic Primitives Tests",
+            name: "Cyclic Tests",
             dependencies: [
-                "Cyclic Primitives",
-                "Cyclic Primitives Test Support",
+                .target(name: "Cyclic"),
+                .target(name: "Cyclic Test Support"),
             ]
         ),
     ],

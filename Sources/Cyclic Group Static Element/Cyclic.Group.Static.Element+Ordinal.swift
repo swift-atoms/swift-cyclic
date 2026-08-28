@@ -1,6 +1,6 @@
-public import Cyclic_Group_Static_Primitives
-public import Cyclic_Namespace_Primitives
-public import Ordinal_Primitives
+public import Cyclic_Group_Static
+public import Cyclic_Namespace
+public import Ordinal
 
 extension Ordinal {
 
