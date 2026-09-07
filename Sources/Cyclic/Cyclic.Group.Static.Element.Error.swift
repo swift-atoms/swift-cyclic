@@ -1,5 +1,3 @@
-public import Cyclic
-public import Cyclic_Group_Static
 
 extension Cyclic::Cyclic.Group.Static.Element {
 

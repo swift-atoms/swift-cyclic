@@ -1,11 +1,10 @@
 import Cardinal
 import Cardinal_Standard_Library_Integration
-import Cyclic
 import Ordinal
 import Ordinal_Standard_Library_Integration
 import Testing
 
-@testable import Cyclic_Group
+@testable import Cyclic
 
 extension Cyclic.Group {
     @Suite

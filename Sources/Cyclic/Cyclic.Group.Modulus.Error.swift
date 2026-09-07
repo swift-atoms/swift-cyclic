@@ -1,4 +1,3 @@
-public import Cyclic
 
 extension Cyclic::Cyclic.Group.Modulus {
 

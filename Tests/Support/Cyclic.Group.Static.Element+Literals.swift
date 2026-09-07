@@ -1,6 +1,4 @@
 public import Cyclic
-public import Cyclic_Group_Static
-public import Cyclic_Group_Static_Element
 import Ordinal
 
 extension Cyclic::Cyclic.Group.Static.Element: ExpressibleByIntegerLiteral {

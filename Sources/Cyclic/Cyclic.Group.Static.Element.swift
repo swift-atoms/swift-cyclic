@@ -1,6 +1,4 @@
 public import Cardinal
-public import Cyclic
-public import Cyclic_Group_Static
 public import Ordinal
 
 extension Cyclic::Cyclic.Group.Static {

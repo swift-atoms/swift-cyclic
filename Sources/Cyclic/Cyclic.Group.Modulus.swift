@@ -1,5 +1,4 @@
 public import Cardinal
-public import Cyclic
 
 extension Cyclic::Cyclic.Group {
 

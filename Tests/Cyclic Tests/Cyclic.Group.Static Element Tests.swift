@@ -1,13 +1,11 @@
 import Cardinal
 import Cardinal_Standard_Library_Integration
-import Cyclic
-import Cyclic_Group_Static
 import Cyclic_Test_Support
 import Ordinal
 import Ordinal_Standard_Library_Integration
 import Testing
 
-@testable import Cyclic_Group_Static_Element
+@testable import Cyclic
 
 extension Cyclic.Group {
     @Suite

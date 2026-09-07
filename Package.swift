@@ -12,28 +12,10 @@ let package = Package(
         .visionOS(.v27),
     ],
     products: [
-
-        .library(
-            name: "Cyclic Group",
-            targets: ["Cyclic Group"]
-        ),
-        .library(
-            name: "Cyclic Group Static Element",
-            targets: ["Cyclic Group Static Element"]
-        ),
-        .library(
-            name: "Cyclic Group Static",
-            targets: ["Cyclic Group Static"]
-        ),
-        .library(
-            name: "Cyclic",
-            targets: ["Cyclic"]
-        ),
-
-        .library(
-            name: "Cyclic Test Support",
-            targets: ["Cyclic Test Support"]
-        ),
+        .library(name: "Cyclic", targets: ["Cyclic"]),
+        .library(name: "Cyclic Standard Library Integration", targets: ["Cyclic Standard Library Integration"]),
+        .library(name: "Cyclic Foundation Library Integration", targets: ["Cyclic Foundation Library Integration"]),
+        .library(name: "Cyclic Test Support", targets: ["Cyclic Test Support"]),
     ],
     dependencies: [
         .package(
@@ -46,43 +28,33 @@ let package = Package(
         ),
     ],
     targets: [
-
         .target(
-            name: "Cyclic"
-        ),
-
-        .target(
-            name: "Cyclic Group Static",
+            name: "Cyclic",
             dependencies: [
-                .target(name: "Cyclic")
-            ]
-        ),
-
-        .target(
-            name: "Cyclic Group Static Element",
-            dependencies: [
-                .target(name: "Cyclic"),
-                .target(name: "Cyclic Group Static"),
                 .product(name: "Cardinal", package: "swift-cardinal"),
                 .product(name: "Ordinal", package: "swift-ordinal"),
-            ]
+            ],
+            path: "Sources/Cyclic"
         ),
-
         .target(
-            name: "Cyclic Group",
+            name: "Cyclic Standard Library Integration",
             dependencies: [
                 .target(name: "Cyclic"),
-                .product(name: "Cardinal", package: "swift-cardinal"),
-                .product(name: "Ordinal", package: "swift-ordinal"),
-            ]
+            ],
+            path: "Sources/Cyclic Standard Library Integration"
         ),
-
+        .target(
+            name: "Cyclic Foundation Library Integration",
+            dependencies: [
+                .target(name: "Cyclic"),
+                .target(name: "Cyclic Standard Library Integration"),
+            ],
+            path: "Sources/Cyclic Foundation Library Integration"
+        ),
         .target(
             name: "Cyclic Test Support",
             dependencies: [
                 .target(name: "Cyclic"),
-                .target(name: "Cyclic Group Static"),
-                .target(name: "Cyclic Group Static Element"),
                 .product(name: "Ordinal", package: "swift-ordinal"),
             ],
             path: "Tests/Support"
@@ -91,28 +63,22 @@ let package = Package(
             name: "Cyclic Tests",
             dependencies: [
                 .target(name: "Cyclic"),
-                .target(name: "Cyclic Group"),
-                .target(name: "Cyclic Group Static"),
-                .target(name: "Cyclic Group Static Element"),
                 .target(name: "Cyclic Test Support"),
                 .product(name: "Cardinal", package: "swift-cardinal"),
-                .product(
-                    name: "Cardinal Standard Library Integration",
-                    package: "swift-cardinal"
-                ),
+                .product(name: "Cardinal Standard Library Integration", package: "swift-cardinal"),
                 .product(name: "Ordinal", package: "swift-ordinal"),
-                .product(
-                    name: "Ordinal Standard Library Integration",
-                    package: "swift-ordinal"
-                ),
-            ]
+                .product(name: "Ordinal Standard Library Integration", package: "swift-ordinal"),
+                .target(name: "Cyclic Standard Library Integration"),
+                .target(name: "Cyclic Foundation Library Integration"),
+            ],
+            path: "Tests/Cyclic Tests"
         ),
     ],
     swiftLanguageModes: [.v6]
 )
 
-for target in package.targets where ![.system, .binary, .plugin, .macro].contains(target.type) {
-    let ecosystem: [SwiftSetting] = [
+for target in package.targets {
+    target.swiftSettings = [
         .strictMemorySafety(),
         .enableUpcomingFeature("ExistentialAny"),
         .enableUpcomingFeature("InternalImportsByDefault"),
@@ -121,8 +87,4 @@ for target in package.targets where ![.system, .binary, .plugin, .macro].contain
         .enableExperimentalFeature("Lifetimes"),
         .enableUpcomingFeature("InferIsolatedConformances"),
     ]
-
-    let package: [SwiftSetting] = []
-
-    target.swiftSettings = (target.swiftSettings ?? []) + ecosystem + package
 }

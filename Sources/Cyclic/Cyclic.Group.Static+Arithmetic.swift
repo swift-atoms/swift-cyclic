@@ -1,6 +1,4 @@
 public import Cardinal
-public import Cyclic
-public import Cyclic_Group_Static
 public import Ordinal
 
 extension Cyclic::Cyclic.Group.Static.Element {
@@ -58,17 +56,3 @@ extension Cyclic::Cyclic.Group.Static.Element {
     }
 }
 
-@usableFromInline
-func __cyclicAdd(_ lhs: UInt, _ rhs: UInt, modulus: UInt) -> UInt {
-    let lhs = lhs % modulus
-    let rhs = rhs % modulus
-    let remaining = modulus - lhs
-    return rhs >= remaining ? rhs - remaining : lhs + rhs
-}
-
-@usableFromInline
-func __cyclicSubtract(_ lhs: UInt, _ rhs: UInt, modulus: UInt) -> UInt {
-    let lhs = lhs % modulus
-    let rhs = rhs % modulus
-    return lhs >= rhs ? lhs - rhs : modulus - (rhs - lhs)
-}
