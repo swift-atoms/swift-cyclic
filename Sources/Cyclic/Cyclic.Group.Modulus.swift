@@ -34,10 +34,3 @@ extension Cyclic::Cyclic.Group.Modulus {
         hasher.combine(value.rawValue)
     }
 }
-
-extension Cyclic::Cyclic.Group.Modulus: CustomStringConvertible {
-
-    public var description: String {
-        "Cyclic.Group.Modulus(\(value))"
-    }
-}

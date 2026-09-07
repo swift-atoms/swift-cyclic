@@ -1,7 +1,5 @@
 import Cardinal
-import Cardinal_Standard_Library_Integration
 import Ordinal
-import Ordinal_Standard_Library_Integration
 import Testing
 
 @testable import Cyclic

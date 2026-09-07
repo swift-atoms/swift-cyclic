@@ -1,4 +1,3 @@
-
 extension Cyclic::Cyclic.Group.Static.Element {
 
     public enum Error: Swift.Error, Hashable, Sendable {

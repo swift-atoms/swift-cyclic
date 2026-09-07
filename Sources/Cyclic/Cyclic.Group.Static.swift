@@ -1,4 +1,3 @@
-
 extension Cyclic::Cyclic.Group {
 
     public struct Static<let modulus: Int>: Sendable {

@@ -52,10 +52,3 @@ extension Cyclic::Cyclic.Group.Element {
         hasher.combine(residue.rawValue)
     }
 }
-
-extension Cyclic::Cyclic.Group.Element: CustomStringConvertible {
-
-    public var description: String {
-        "Cyclic.Group.Element(\(residue))"
-    }
-}

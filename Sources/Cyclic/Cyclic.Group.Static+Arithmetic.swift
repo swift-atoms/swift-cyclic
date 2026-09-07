@@ -55,4 +55,3 @@ extension Cyclic::Cyclic.Group.Static.Element {
         return Self(__unchecked: Ordinal::Ordinal(Self.order.rawValue - residue))
     }
 }
-

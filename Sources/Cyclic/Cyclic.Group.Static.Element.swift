@@ -81,10 +81,3 @@ extension Cyclic::Cyclic.Group.Static.Element {
         hasher.combine(position.rawValue)
     }
 }
-
-extension Cyclic::Cyclic.Group.Static.Element: CustomStringConvertible {
-
-    public var description: String {
-        "Cyclic.Group.Static<\(modulus)>.Element(\(position))"
-    }
-}

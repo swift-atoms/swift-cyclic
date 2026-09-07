@@ -13,8 +13,8 @@ let package = Package(
     ],
     products: [
         .library(name: "Cyclic", targets: ["Cyclic"]),
-        .library(name: "Cyclic Standard Library Integration", targets: ["Cyclic Standard Library Integration"]),
-        .library(name: "Cyclic Foundation Library Integration", targets: ["Cyclic Foundation Library Integration"]),
+
+        .library(name: "Cyclic Foundation Integration", targets: ["Cyclic Foundation Integration"]),
         .library(name: "Cyclic Test Support", targets: ["Cyclic Test Support"]),
     ],
     dependencies: [
@@ -36,20 +36,13 @@ let package = Package(
             ],
             path: "Sources/Cyclic"
         ),
+        
         .target(
-            name: "Cyclic Standard Library Integration",
+            name: "Cyclic Foundation Integration",
             dependencies: [
                 .target(name: "Cyclic"),
             ],
-            path: "Sources/Cyclic Standard Library Integration"
-        ),
-        .target(
-            name: "Cyclic Foundation Library Integration",
-            dependencies: [
-                .target(name: "Cyclic"),
-                .target(name: "Cyclic Standard Library Integration"),
-            ],
-            path: "Sources/Cyclic Foundation Library Integration"
+            path: "Sources/Cyclic Foundation Integration"
         ),
         .target(
             name: "Cyclic Test Support",
@@ -65,11 +58,8 @@ let package = Package(
                 .target(name: "Cyclic"),
                 .target(name: "Cyclic Test Support"),
                 .product(name: "Cardinal", package: "swift-cardinal"),
-                .product(name: "Cardinal Standard Library Integration", package: "swift-cardinal"),
                 .product(name: "Ordinal", package: "swift-ordinal"),
-                .product(name: "Ordinal Standard Library Integration", package: "swift-ordinal"),
-                .target(name: "Cyclic Standard Library Integration"),
-                .target(name: "Cyclic Foundation Library Integration"),
+                .target(name: "Cyclic Foundation Integration"),
             ],
             path: "Tests/Cyclic Tests"
         ),
