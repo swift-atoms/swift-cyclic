@@ -6,15 +6,13 @@ import Testing
 
 extension Cyclic.Group {
     @Suite
-    struct Test {
-        @Suite struct Unit {}
+    struct `Cyclic group tests` {
+        @Suite struct `Valid group operations` {}
         @Suite struct `Edge Case` {}
-        @Suite struct Integration {}
-        @Suite(.serialized) struct Performance {}
     }
 }
 
-extension Cyclic.Group.Test.Unit {
+extension Cyclic.Group.`Cyclic group tests`.`Valid group operations` {
 
     @Test
     func `Valid modulus construction`() throws(Cyclic.Group.Modulus.Error) {
@@ -152,7 +150,7 @@ extension Cyclic.Group.Test.Unit {
     }
 }
 
-extension Cyclic.Group.Test.`Edge Case` {
+extension Cyclic.Group.`Cyclic group tests`.`Edge Case` {
 
     @Test
     func `Zero modulus throws`() {

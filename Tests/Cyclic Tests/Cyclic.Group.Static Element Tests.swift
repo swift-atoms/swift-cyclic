@@ -8,14 +8,12 @@ import Testing
 extension Cyclic.Group {
     @Suite
     struct `Static Element Test` {
-        @Suite struct Unit {}
+        @Suite struct `Valid group operations` {}
         @Suite struct `Edge Case` {}
-        @Suite struct Integration {}
-        @Suite(.serialized) struct Performance {}
     }
 }
 
-extension Cyclic.Group.`Static Element Test`.Unit {
+extension Cyclic.Group.`Static Element Test`.`Valid group operations` {
 
     @Test
     func `Valid construction via throwing init`() throws(Cyclic.Group.Static<5>.Element.Error) {
@@ -169,6 +167,18 @@ extension Cyclic.Group.`Static Element Test`.`Edge Case` {
         }
         #expect(throws: Cyclic.Group.Static<5>.Element.Error.outOfBounds(100)) {
             _ = try Cyclic.Group.Static<5>.Element(Ordinal(100))
+        }
+    }
+
+    @Test
+    func `full width invalid positions survive typed error construction`() {
+        let position = Ordinal(UInt.max)
+        do {
+            _ = try Cyclic.Group.Static<5>.Element(position)
+            Issue.record("An out of bounds position was accepted")
+        } catch {
+            #expect(error == .outOfBounds(position))
+            #expect(Set([error, .outOfBounds(position)]).count == 1)
         }
     }
 

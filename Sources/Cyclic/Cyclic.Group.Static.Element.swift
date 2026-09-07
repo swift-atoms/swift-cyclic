@@ -11,7 +11,7 @@ extension Cyclic::Cyclic.Group.Static {
         public init(_ position: Ordinal::Ordinal) throws(Self.Error) {
             guard modulus > 0 else { throw .invalidModulus }
             guard position.rawValue < Self.order.rawValue else {
-                throw .outOfBounds(Int(position.rawValue))
+                throw .outOfBounds(position)
             }
             self.position = position
         }
