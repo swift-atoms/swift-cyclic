@@ -1,5 +1,5 @@
-public import Cardinal
-public import Ordinal
+import Cardinal
+import Ordinal
 
 extension Cyclic::Cyclic.Group.Static.Element: Swift.CustomStringConvertible {
 

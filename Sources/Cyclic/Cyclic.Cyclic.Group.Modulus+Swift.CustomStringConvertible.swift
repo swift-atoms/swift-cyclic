@@ -1,4 +1,4 @@
-public import Cardinal
+import Cardinal
 
 extension Cyclic::Cyclic.Group.Modulus: Swift.CustomStringConvertible {
 

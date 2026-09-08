@@ -1,2 +1,2 @@
 @_exported public import Cyclic
-public import Foundation
+import Foundation
