@@ -18,6 +18,9 @@ let package = Package(
         .library(name: "Cyclic Test Support", targets: ["Cyclic Test Support"]),
     ],
     dependencies: [
+
+        .package(url: "https://github.com/swift-atoms/swift-hash.git", branch: "main"),
+
         .package(
             url: "https://github.com/swift-atoms/swift-ordinal.git",
             branch: "main"
@@ -31,6 +34,7 @@ let package = Package(
         .target(
             name: "Cyclic",
             dependencies: [
+                .product(name: "Hash", package: "swift-hash"),
                 .product(name: "Cardinal", package: "swift-cardinal"),
                 .product(name: "Ordinal", package: "swift-ordinal"),
             ],
@@ -62,6 +66,17 @@ let package = Package(
                 .target(name: "Cyclic Foundation Integration"),
             ],
             path: "Tests/Cyclic Tests"
+        ),
+        .testTarget(
+            name: "Consolidated Cyclic Hash Tests",
+            dependencies: [
+
+                .target(name: "Cyclic"),
+                .product(name: "Hash", package: "swift-hash"),
+                .product(name: "Cardinal", package: "swift-cardinal"),
+                .product(name: "Ordinal", package: "swift-ordinal"),
+            ],
+            path: "Tests/Consolidated swift-cyclic-hash"
         ),
     ],
     swiftLanguageModes: [.v6]
