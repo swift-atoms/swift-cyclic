@@ -6,22 +6,22 @@ import Testing
 
 extension Cyclic.Group {
     @Suite
-    struct `Cyclic group tests` {
-        @Suite struct `Valid group operations` {}
-        @Suite struct `Edge Case` {}
+    struct `Dynamic cyclic groups normalize residues under a positive modulus` {
+        @Suite struct `Cyclic group arithmetic wraps residues and preserves group laws` {}
+        @Suite struct `Cyclic group construction rejects a zero modulus` {}
     }
 }
 
-extension Cyclic.Group.`Cyclic group tests`.`Valid group operations` {
+extension Cyclic.Group.`Dynamic cyclic groups normalize residues under a positive modulus`.`Cyclic group arithmetic wraps residues and preserves group laws` {
 
     @Test
-    func `Valid modulus construction`() throws(Cyclic.Group.Modulus.Error) {
+    func `A positive modulus preserves its requested value`() throws(Cyclic.Group.Modulus.Error) {
         let modulus = try Cyclic.Group.Modulus(Cardinal(5))
         #expect(modulus.value == Cardinal(5))
     }
 
     @Test
-    func `Element construction with normalization`() throws(Cyclic.Group.Modulus.Error) {
+    func `Cyclic element construction reduces positions modulo the group order`() throws(Cyclic.Group.Modulus.Error) {
         let modulus = try Cyclic.Group.Modulus(Cardinal(5))
 
         let e0 = Cyclic.Group.Element(Ordinal(0), modulus: modulus)
@@ -48,7 +48,7 @@ extension Cyclic.Group.`Cyclic group tests`.`Valid group operations` {
     }
 
     @Test
-    func `Successor without wrap`() throws(Cyclic.Group.Modulus.Error) {
+    func `Cyclic successor advances an interior residue by one`() throws(Cyclic.Group.Modulus.Error) {
         let modulus = try Cyclic.Group.Modulus(Cardinal(5))
         let element = Cyclic.Group.Element(__unchecked: Ordinal(2))
         let next = Cyclic.Group.successor(element, modulus: modulus)
@@ -56,7 +56,7 @@ extension Cyclic.Group.`Cyclic group tests`.`Valid group operations` {
     }
 
     @Test
-    func `Successor with wrap`() throws(Cyclic.Group.Modulus.Error) {
+    func `Cyclic successor wraps the final residue to zero`() throws(Cyclic.Group.Modulus.Error) {
         let modulus = try Cyclic.Group.Modulus(Cardinal(5))
         let element = Cyclic.Group.Element(__unchecked: Ordinal(4))
         let next = Cyclic.Group.successor(element, modulus: modulus)
@@ -64,7 +64,7 @@ extension Cyclic.Group.`Cyclic group tests`.`Valid group operations` {
     }
 
     @Test
-    func `Predecessor without wrap`() throws(Cyclic.Group.Modulus.Error) {
+    func `Cyclic predecessor retreats an interior residue by one`() throws(Cyclic.Group.Modulus.Error) {
         let modulus = try Cyclic.Group.Modulus(Cardinal(5))
         let element = Cyclic.Group.Element(__unchecked: Ordinal(3))
         let prev = Cyclic.Group.predecessor(element, modulus: modulus)
@@ -72,7 +72,7 @@ extension Cyclic.Group.`Cyclic group tests`.`Valid group operations` {
     }
 
     @Test
-    func `Predecessor with wrap`() throws(Cyclic.Group.Modulus.Error) {
+    func `Cyclic predecessor wraps zero to the final residue`() throws(Cyclic.Group.Modulus.Error) {
         let modulus = try Cyclic.Group.Modulus(Cardinal(5))
         let element = Cyclic.Group.Element.zero
         let prev = Cyclic.Group.predecessor(element, modulus: modulus)
@@ -80,7 +80,7 @@ extension Cyclic.Group.`Cyclic group tests`.`Valid group operations` {
     }
 
     @Test
-    func `Add without wrap`() throws(Cyclic.Group.Modulus.Error) {
+    func `Cyclic addition preserves a sum below the modulus`() throws(Cyclic.Group.Modulus.Error) {
         let modulus = try Cyclic.Group.Modulus(Cardinal(10))
         let a = Cyclic.Group.Element(__unchecked: Ordinal(3))
         let b = Cyclic.Group.Element(__unchecked: Ordinal(4))
@@ -89,7 +89,7 @@ extension Cyclic.Group.`Cyclic group tests`.`Valid group operations` {
     }
 
     @Test
-    func `Add with wrap`() throws(Cyclic.Group.Modulus.Error) {
+    func `Cyclic addition reduces a sum crossing the modulus`() throws(Cyclic.Group.Modulus.Error) {
         let modulus = try Cyclic.Group.Modulus(Cardinal(5))
         let a = Cyclic.Group.Element(__unchecked: Ordinal(4))
         let b = Cyclic.Group.Element(__unchecked: Ordinal(3))
@@ -98,7 +98,7 @@ extension Cyclic.Group.`Cyclic group tests`.`Valid group operations` {
     }
 
     @Test
-    func `Subtract without wrap`() throws(Cyclic.Group.Modulus.Error) {
+    func `Cyclic subtraction preserves a nonnegative residue difference`() throws(Cyclic.Group.Modulus.Error) {
         let modulus = try Cyclic.Group.Modulus(Cardinal(10))
         let a = Cyclic.Group.Element(__unchecked: Ordinal(7))
         let b = Cyclic.Group.Element(__unchecked: Ordinal(3))
@@ -107,7 +107,7 @@ extension Cyclic.Group.`Cyclic group tests`.`Valid group operations` {
     }
 
     @Test
-    func `Subtract with wrap`() throws(Cyclic.Group.Modulus.Error) {
+    func `Cyclic subtraction wraps a negative residue difference`() throws(Cyclic.Group.Modulus.Error) {
         let modulus = try Cyclic.Group.Modulus(Cardinal(5))
         let a = Cyclic.Group.Element(__unchecked: Ordinal(1))
         let b = Cyclic.Group.Element(__unchecked: Ordinal(3))
@@ -132,7 +132,7 @@ extension Cyclic.Group.`Cyclic group tests`.`Valid group operations` {
     }
 
     @Test
-    func `Ring buffer index advancement`() throws(Cyclic.Group.Modulus.Error) {
+    func `Cyclic index advancement wraps after reaching capacity`() throws(Cyclic.Group.Modulus.Error) {
         let capacity = try Cyclic.Group.Modulus(Cardinal(4))
         var tail = Cyclic.Group.Element.zero
 
@@ -150,7 +150,7 @@ extension Cyclic.Group.`Cyclic group tests`.`Valid group operations` {
     }
 }
 
-extension Cyclic.Group.`Cyclic group tests`.`Edge Case` {
+extension Cyclic.Group.`Dynamic cyclic groups normalize residues under a positive modulus`.`Cyclic group construction rejects a zero modulus` {
 
     @Test
     func `Zero modulus throws`() {

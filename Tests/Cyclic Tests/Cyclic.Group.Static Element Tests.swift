@@ -7,16 +7,16 @@ import Testing
 
 extension Cyclic.Group {
     @Suite
-    struct `Static Element Test` {
-        @Suite struct `Valid group operations` {}
-        @Suite struct `Edge Case` {}
+    struct `Static cyclic elements preserve their order through construction and arithmetic` {
+        @Suite struct `Static cyclic arithmetic wraps positions and preserves group identities` {}
+        @Suite struct `Static cyclic boundaries reject invalid orders and positions` {}
     }
 }
 
-extension Cyclic.Group.`Static Element Test`.`Valid group operations` {
+extension Cyclic.Group.`Static cyclic elements preserve their order through construction and arithmetic`.`Static cyclic arithmetic wraps positions and preserves group identities` {
 
     @Test
-    func `Valid construction via throwing init`() throws(Cyclic.Group.Static<5>.Element.Error) {
+    func `Checked static cyclic construction preserves positions within the order`() throws(Cyclic.Group.Static<5>.Element.Error) {
         let g0 = try Cyclic.Group.Static<5>.Element(Ordinal(0))
         #expect(g0.position == 0)
 
@@ -45,7 +45,7 @@ extension Cyclic.Group.`Static Element Test`.`Valid group operations` {
     }
 
     @Test
-    func `Addition without wrap`() {
+    func `Static cyclic addition preserves a sum below the order`() {
         let a: Cyclic.Group.Static<10>.Element = 3
         let b: Cyclic.Group.Static<10>.Element = 4
         let sum = a + b
@@ -53,7 +53,7 @@ extension Cyclic.Group.`Static Element Test`.`Valid group operations` {
     }
 
     @Test
-    func `Addition with wrap`() {
+    func `Static cyclic addition reduces a sum crossing the order`() {
         let a: Cyclic.Group.Static<5>.Element = 4
         let b: Cyclic.Group.Static<5>.Element = 3
         let sum = a + b
@@ -68,7 +68,7 @@ extension Cyclic.Group.`Static Element Test`.`Valid group operations` {
     }
 
     @Test
-    func `Subtraction without wrap`() {
+    func `Static cyclic subtraction preserves a nonnegative position difference`() {
         let a: Cyclic.Group.Static<10>.Element = 7
         let b: Cyclic.Group.Static<10>.Element = 3
         let diff = a - b
@@ -76,7 +76,7 @@ extension Cyclic.Group.`Static Element Test`.`Valid group operations` {
     }
 
     @Test
-    func `Subtraction with wrap`() {
+    func `Static cyclic subtraction wraps a negative position difference`() {
         let a: Cyclic.Group.Static<5>.Element = 1
         let b: Cyclic.Group.Static<5>.Element = 3
         let diff = a - b
@@ -98,7 +98,7 @@ extension Cyclic.Group.`Static Element Test`.`Valid group operations` {
     }
 
     @Test
-    func `Compound addition`() {
+    func `Compound cyclic addition updates and wraps the stored position`() {
         var g: Cyclic.Group.Static<5>.Element = 3
         g += .one
         #expect(g.position == 4)
@@ -107,7 +107,7 @@ extension Cyclic.Group.`Static Element Test`.`Valid group operations` {
     }
 
     @Test
-    func `Compound subtraction`() {
+    func `Compound cyclic subtraction updates and wraps the stored position`() {
         var g: Cyclic.Group.Static<5>.Element = 1
         g -= .one
         #expect(g.position == 0)
@@ -116,7 +116,7 @@ extension Cyclic.Group.`Static Element Test`.`Valid group operations` {
     }
 
     @Test
-    func `Ring buffer index advancement`() {
+    func `Cyclic index advancement wraps after reaching capacity`() {
         var tail = Cyclic.Group.Static<4>.Element.zero
 
         tail += .one
@@ -133,7 +133,7 @@ extension Cyclic.Group.`Static Element Test`.`Valid group operations` {
     }
 
     @Test
-    func `Ordering`() {
+    func `Static cyclic elements compare according to their positions`() {
         let a: Cyclic.Group.Static<5>.Element = 2
         let b: Cyclic.Group.Static<5>.Element = 4
         #expect(a < b)
@@ -151,14 +151,14 @@ extension Cyclic.Group.`Static Element Test`.`Valid group operations` {
     }
 
     @Test
-    func `Modulus property`() {
+    func `A static cyclic group exposes its declared modulus`() {
         #expect(Cyclic.Group.Static<7>.modulus == 7)
         #expect(Cyclic.Group.Static<1>.modulus == 1)
         #expect(Cyclic.Group.Static<100>.modulus == 100)
     }
 }
 
-extension Cyclic.Group.`Static Element Test`.`Edge Case` {
+extension Cyclic.Group.`Static cyclic elements preserve their order through construction and arithmetic`.`Static cyclic boundaries reject invalid orders and positions` {
 
     @Test
     func `Out of bounds construction throws`() {
@@ -190,7 +190,7 @@ extension Cyclic.Group.`Static Element Test`.`Edge Case` {
     }
 
     @Test
-    func `Subtraction wrap from zero`() {
+    func `Subtracting one from cyclic zero produces the final position`() {
         let a: Cyclic.Group.Static<5>.Element = 0
         let b: Cyclic.Group.Static<5>.Element = 1
         let diff = a - b
