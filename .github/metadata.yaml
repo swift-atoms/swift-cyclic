@@ -1,4 +1,3 @@
-# .github/metadata.yaml
 description: "Modular-arithmetic cyclic group types — dynamic (container-owned modulus) and compile-time-modulus surfaces."
 topics:
   - primitives
