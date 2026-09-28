@@ -60,7 +60,7 @@ let package = Package(
                 .product(name: "Index", package: "swift-index", condition: .when(traits: ["Index"])),
                 .product(name: "Sequence", package: "swift-sequence", condition: .when(traits: ["Iterator"])),
                 .product(name: "Iterator", package: "swift-iterator", condition: .when(traits: ["Iterator"])),
-                .product(name: "Tagged", package: "swift-tagged", condition: .when(traits: ["Tagged"])),
+                .product(name: "Tagged", package: "swift-tagged", condition: .when(traits: ["Tagged", "Index"])),
                 .product(name: "Cardinal", package: "swift-cardinal"),
                 .product(name: "Ordinal", package: "swift-ordinal"),
             ],
@@ -98,8 +98,8 @@ let package = Package(
             dependencies: [
                 .target(name: "Cyclic"),
                 .target(name: "Cyclic Test Support"),
-                .product(name: "Ordinal", package: "swift-ordinal", condition: .when(traits: ["Tagged"])),
-                .product(name: "Tagged", package: "swift-tagged", condition: .when(traits: ["Tagged"])),
+                .product(name: "Ordinal", package: "swift-ordinal", condition: .when(traits: ["Tagged", "Index"])),
+                .product(name: "Tagged", package: "swift-tagged", condition: .when(traits: ["Tagged", "Index"])),
             ],
             path: "Tests/Cyclic Tagged Tests"
         ),
