@@ -26,10 +26,14 @@ import Testing
         ]
         process.standardError = errors
         try process.run()
+        let watchdog = DispatchWorkItem { if process.isRunning { process.terminate() } }
+        DispatchQueue.global().asyncAfter(deadline: .now() + 60, execute: watchdog)
+        defer { watchdog.cancel() }
         let diagnostic = String(
             decoding: errors.fileHandleForReading.readDataToEndOfFile(), as: UTF8.self
         )
         process.waitUntilExit()
+        #expect(process.terminationReason == .exit, "\(diagnostic)")
         let mismatched = configuration != "MATCHING"
         #expect((process.terminationStatus != 0) == mismatched, "\(diagnostic)")
         if mismatched {
