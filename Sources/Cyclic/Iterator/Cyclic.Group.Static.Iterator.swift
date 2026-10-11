@@ -20,15 +20,17 @@ extension Cyclic.Group.Static {
 
             self.bound = Cardinal(UInt(modulus))
         }
+    }
+}
 
-        @inlinable
-        public mutating func next() -> Cyclic.Group.Static<modulus>.Element? {
-            guard current.rawValue < bound.rawValue else { return nil }
+extension Cyclic.Group.Static.Iterator {
+    @inlinable
+    public mutating func next() -> Cyclic.Group.Static<modulus>.Element? {
+        guard current.rawValue < bound.rawValue else { return nil }
 
-            let element = Cyclic.Group.Static<modulus>.Element(__unchecked: current)
-            current = Ordinal(current.rawValue + 1)
-            return element
-        }
+        let element = Cyclic.Group.Static<modulus>.Element(__unchecked: current)
+        current = Ordinal(current.rawValue + 1)
+        return element
     }
 }
 #endif

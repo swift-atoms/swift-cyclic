@@ -28,7 +28,7 @@ extension Cyclic.Group.Static: Iterable {
     }
 }
 
-extension Cyclic.Group.Static: Swift.Sequence {
+extension Cyclic.Group.Static: Swift::Sequence {
 
     @inlinable
     public var underestimatedCount: Int { Self.modulus }

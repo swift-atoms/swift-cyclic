@@ -89,7 +89,6 @@ let package = Package(
                 .target(name: "Cyclic Test Support"),
                 .product(name: "Cardinal", package: "swift-cardinal"),
                 .product(name: "Ordinal", package: "swift-ordinal"),
-                .target(name: "Cyclic Foundation Integration"),
             ],
             path: "Tests/Cyclic Tests"
         ),
@@ -119,7 +118,7 @@ let package = Package(
     swiftLanguageModes: [.v6]
 )
 
-for target in package.targets where ![.system, .binary, .plugin].contains(target.type) {
+for target in package.targets where ![.system, .binary, .plugin, .macro].contains(target.type) {
     target.swiftSettings = (target.swiftSettings ?? []) + [
         .strictMemorySafety(),
         .enableUpcomingFeature("ExistentialAny"),
