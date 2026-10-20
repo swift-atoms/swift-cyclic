@@ -52,8 +52,7 @@ extension Cyclic.Group.`Dynamic cyclic groups normalize residues under a positiv
     }
 
     @Test
-    func `Cyclic successor advances an interior residue by one`() throws(Cyclic.Group.Modulus.Error)
-    {
+    func `Cyclic successor advances an interior residue by one`() throws(Cyclic.Group.Modulus.Error) {
         let modulus = try Cyclic.Group.Modulus(Cardinal(5))
         let element = Cyclic.Group.Element(__unchecked: Ordinal(2))
         let next = Cyclic.Group.successor(element, modulus: modulus)
