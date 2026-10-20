@@ -29,7 +29,6 @@ let package = Package(
         .package(url: "https://github.com/swift-atoms/swift-iterator.git", branch: "main"),
         .package(url: "https://github.com/swift-atoms/swift-tagged.git", branch: "main"),
 
-
         .package(
             url: "https://github.com/swift-atoms/swift-ordinal.git",
             branch: "main"
@@ -43,11 +42,31 @@ let package = Package(
         .testTarget(
             name: "Absorbed swift-cyclic-index Tests",
             dependencies: [
-                .product(name: "Cardinal", package: "swift-cardinal", condition: .when(traits: ["Index"])),
-                .product(name: "Difference", package: "swift-difference", condition: .when(traits: ["Index"])),
-                .product(name: "Index", package: "swift-index", condition: .when(traits: ["Index"])),
-                .product(name: "Ordinal", package: "swift-ordinal", condition: .when(traits: ["Index"])),
-                .product(name: "Tagged", package: "swift-tagged", condition: .when(traits: ["Index"])),
+                .product(
+                    name: "Cardinal",
+                    package: "swift-cardinal",
+                    condition: .when(traits: ["Index"])
+                ),
+                .product(
+                    name: "Difference",
+                    package: "swift-difference",
+                    condition: .when(traits: ["Index"])
+                ),
+                .product(
+                    name: "Index",
+                    package: "swift-index",
+                    condition: .when(traits: ["Index"])
+                ),
+                .product(
+                    name: "Ordinal",
+                    package: "swift-ordinal",
+                    condition: .when(traits: ["Index"])
+                ),
+                .product(
+                    name: "Tagged",
+                    package: "swift-tagged",
+                    condition: .when(traits: ["Index"])
+                ),
                 .target(name: "Cyclic", condition: .when(traits: ["Index"])),
             ],
             path: "Tests/Absorbed swift-cyclic-index Tests",
@@ -56,11 +75,31 @@ let package = Package(
         .target(
             name: "Cyclic",
             dependencies: [
-                .product(name: "Difference", package: "swift-difference", condition: .when(traits: ["Index"])),
-                .product(name: "Index", package: "swift-index", condition: .when(traits: ["Index"])),
-                .product(name: "Sequence", package: "swift-sequence", condition: .when(traits: ["Iterator"])),
-                .product(name: "Iterator", package: "swift-iterator", condition: .when(traits: ["Iterator"])),
-                .product(name: "Tagged", package: "swift-tagged", condition: .when(traits: ["Tagged", "Index"])),
+                .product(
+                    name: "Difference",
+                    package: "swift-difference",
+                    condition: .when(traits: ["Index"])
+                ),
+                .product(
+                    name: "Index",
+                    package: "swift-index",
+                    condition: .when(traits: ["Index"])
+                ),
+                .product(
+                    name: "Sequence",
+                    package: "swift-sequence",
+                    condition: .when(traits: ["Iterator"])
+                ),
+                .product(
+                    name: "Iterator",
+                    package: "swift-iterator",
+                    condition: .when(traits: ["Iterator"])
+                ),
+                .product(
+                    name: "Tagged",
+                    package: "swift-tagged",
+                    condition: .when(traits: ["Tagged", "Index"])
+                ),
                 .product(name: "Cardinal", package: "swift-cardinal"),
                 .product(name: "Ordinal", package: "swift-ordinal"),
             ],
@@ -70,7 +109,7 @@ let package = Package(
         .target(
             name: "Cyclic Foundation Integration",
             dependencies: [
-                .target(name: "Cyclic"),
+                .target(name: "Cyclic")
             ],
             path: "Sources/Cyclic Foundation Integration"
         ),
@@ -97,8 +136,16 @@ let package = Package(
             dependencies: [
                 .target(name: "Cyclic"),
                 .target(name: "Cyclic Test Support"),
-                .product(name: "Ordinal", package: "swift-ordinal", condition: .when(traits: ["Tagged", "Index"])),
-                .product(name: "Tagged", package: "swift-tagged", condition: .when(traits: ["Tagged", "Index"])),
+                .product(
+                    name: "Ordinal",
+                    package: "swift-ordinal",
+                    condition: .when(traits: ["Tagged", "Index"])
+                ),
+                .product(
+                    name: "Tagged",
+                    package: "swift-tagged",
+                    condition: .when(traits: ["Tagged", "Index"])
+                ),
             ],
             path: "Tests/Cyclic Tagged Tests"
         ),
@@ -107,10 +154,26 @@ let package = Package(
             dependencies: [
                 .target(name: "Cyclic"),
                 .target(name: "Cyclic Test Support"),
-                .product(name: "Cardinal", package: "swift-cardinal", condition: .when(traits: ["Iterator"])),
-                .product(name: "Iterator", package: "swift-iterator", condition: .when(traits: ["Iterator"])),
-                .product(name: "Ordinal", package: "swift-ordinal", condition: .when(traits: ["Iterator"])),
-                .product(name: "Sequence", package: "swift-sequence", condition: .when(traits: ["Iterator"])),
+                .product(
+                    name: "Cardinal",
+                    package: "swift-cardinal",
+                    condition: .when(traits: ["Iterator"])
+                ),
+                .product(
+                    name: "Iterator",
+                    package: "swift-iterator",
+                    condition: .when(traits: ["Iterator"])
+                ),
+                .product(
+                    name: "Ordinal",
+                    package: "swift-ordinal",
+                    condition: .when(traits: ["Iterator"])
+                ),
+                .product(
+                    name: "Sequence",
+                    package: "swift-sequence",
+                    condition: .when(traits: ["Iterator"])
+                ),
             ],
             path: "Tests/Cyclic Iterator Tests"
         ),
@@ -119,14 +182,15 @@ let package = Package(
 )
 
 for target in package.targets where ![.system, .binary, .plugin, .macro].contains(target.type) {
-    target.swiftSettings = (target.swiftSettings ?? []) + [
-        .strictMemorySafety(),
-        .enableUpcomingFeature("ExistentialAny"),
-        .enableUpcomingFeature("InternalImportsByDefault"),
-        .enableUpcomingFeature("MemberImportVisibility"),
-        .enableUpcomingFeature("NonisolatedNonsendingByDefault"),
-        .enableUpcomingFeature("InferIsolatedConformances"),
-        .enableExperimentalFeature("Lifetimes"),
-        .treatAllWarnings(as: .error),
-    ]
+    target.swiftSettings =
+        (target.swiftSettings ?? []) + [
+            .strictMemorySafety(),
+            .enableUpcomingFeature("ExistentialAny"),
+            .enableUpcomingFeature("InternalImportsByDefault"),
+            .enableUpcomingFeature("MemberImportVisibility"),
+            .enableUpcomingFeature("NonisolatedNonsendingByDefault"),
+            .enableUpcomingFeature("InferIsolatedConformances"),
+            .enableExperimentalFeature("Lifetimes"),
+            .treatAllWarnings(as: .error),
+        ]
 }

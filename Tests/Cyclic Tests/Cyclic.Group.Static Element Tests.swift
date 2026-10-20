@@ -13,10 +13,15 @@ extension Cyclic.Group {
     }
 }
 
-extension Cyclic.Group.`Static cyclic elements preserve their order through construction and arithmetic`.`Static cyclic arithmetic wraps positions and preserves group identities` {
+extension Cyclic.Group
+    .`Static cyclic elements preserve their order through construction and arithmetic`
+    .`Static cyclic arithmetic wraps positions and preserves group identities`
+{
 
     @Test
-    func `Checked static cyclic construction preserves positions within the order`() throws(Cyclic.Group.Static<5>.Element.Error) {
+    func `Checked static cyclic construction preserves positions within the order`() throws(Cyclic
+        .Group.Static<5>.Element.Error)
+    {
         let g0 = try Cyclic.Group.Static<5>.Element(Ordinal(0))
         #expect(g0.position == 0)
 
@@ -158,7 +163,10 @@ extension Cyclic.Group.`Static cyclic elements preserve their order through cons
     }
 }
 
-extension Cyclic.Group.`Static cyclic elements preserve their order through construction and arithmetic`.`Static cyclic boundaries reject invalid orders and positions` {
+extension Cyclic.Group
+    .`Static cyclic elements preserve their order through construction and arithmetic`
+    .`Static cyclic boundaries reject invalid orders and positions`
+{
 
     @Test
     func `Out of bounds construction throws`() {

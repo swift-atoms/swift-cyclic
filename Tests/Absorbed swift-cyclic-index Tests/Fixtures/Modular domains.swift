@@ -8,15 +8,15 @@ struct First: ~Copyable, ~Escapable {}
 struct Second: ~Copyable, ~Escapable {}
 
 #if MISMATCH_OFFSET
-typealias OffsetDomain = Second
+    typealias OffsetDomain = Second
 #else
-typealias OffsetDomain = First
+    typealias OffsetDomain = First
 #endif
 
 #if MISMATCH_CAPACITY
-typealias CapacityDomain = Second
+    typealias CapacityDomain = Second
 #else
-typealias CapacityDomain = First
+    typealias CapacityDomain = First
 #endif
 
 let position = Index<First>(Ordinal(2))

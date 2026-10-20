@@ -7,7 +7,9 @@ extension Cyclic::Cyclic.Group.Static.Element: ExpressibleByIntegerLiteral {
         do throws(Self.Error) {
             self = try Self(Ordinal::Ordinal(UInt(value)))
         } catch {
-            preconditionFailure("Literal \(value) invalid for Cyclic.Group.Static<\(modulus)>.Element")
+            preconditionFailure(
+                "Literal \(value) invalid for Cyclic.Group.Static<\(modulus)>.Element"
+            )
         }
     }
 }

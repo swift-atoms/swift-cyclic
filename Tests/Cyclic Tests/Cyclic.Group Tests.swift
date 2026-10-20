@@ -12,7 +12,9 @@ extension Cyclic.Group {
     }
 }
 
-extension Cyclic.Group.`Dynamic cyclic groups normalize residues under a positive modulus`.`Cyclic group arithmetic wraps residues and preserves group laws` {
+extension Cyclic.Group.`Dynamic cyclic groups normalize residues under a positive modulus`
+    .`Cyclic group arithmetic wraps residues and preserves group laws`
+{
 
     @Test
     func `A positive modulus preserves its requested value`() throws(Cyclic.Group.Modulus.Error) {
@@ -21,7 +23,9 @@ extension Cyclic.Group.`Dynamic cyclic groups normalize residues under a positiv
     }
 
     @Test
-    func `Cyclic element construction reduces positions modulo the group order`() throws(Cyclic.Group.Modulus.Error) {
+    func `Cyclic element construction reduces positions modulo the group order`() throws(Cyclic
+        .Group.Modulus.Error)
+    {
         let modulus = try Cyclic.Group.Modulus(Cardinal(5))
 
         let e0 = Cyclic.Group.Element(Ordinal(0), modulus: modulus)
@@ -48,7 +52,8 @@ extension Cyclic.Group.`Dynamic cyclic groups normalize residues under a positiv
     }
 
     @Test
-    func `Cyclic successor advances an interior residue by one`() throws(Cyclic.Group.Modulus.Error) {
+    func `Cyclic successor advances an interior residue by one`() throws(Cyclic.Group.Modulus.Error)
+    {
         let modulus = try Cyclic.Group.Modulus(Cardinal(5))
         let element = Cyclic.Group.Element(__unchecked: Ordinal(2))
         let next = Cyclic.Group.successor(element, modulus: modulus)
@@ -64,7 +69,9 @@ extension Cyclic.Group.`Dynamic cyclic groups normalize residues under a positiv
     }
 
     @Test
-    func `Cyclic predecessor retreats an interior residue by one`() throws(Cyclic.Group.Modulus.Error) {
+    func `Cyclic predecessor retreats an interior residue by one`() throws(Cyclic.Group.Modulus
+        .Error)
+    {
         let modulus = try Cyclic.Group.Modulus(Cardinal(5))
         let element = Cyclic.Group.Element(__unchecked: Ordinal(3))
         let prev = Cyclic.Group.predecessor(element, modulus: modulus)
@@ -98,7 +105,9 @@ extension Cyclic.Group.`Dynamic cyclic groups normalize residues under a positiv
     }
 
     @Test
-    func `Cyclic subtraction preserves a nonnegative residue difference`() throws(Cyclic.Group.Modulus.Error) {
+    func `Cyclic subtraction preserves a nonnegative residue difference`() throws(Cyclic.Group
+        .Modulus.Error)
+    {
         let modulus = try Cyclic.Group.Modulus(Cardinal(10))
         let a = Cyclic.Group.Element(__unchecked: Ordinal(7))
         let b = Cyclic.Group.Element(__unchecked: Ordinal(3))
@@ -107,7 +116,9 @@ extension Cyclic.Group.`Dynamic cyclic groups normalize residues under a positiv
     }
 
     @Test
-    func `Cyclic subtraction wraps a negative residue difference`() throws(Cyclic.Group.Modulus.Error) {
+    func `Cyclic subtraction wraps a negative residue difference`() throws(Cyclic.Group.Modulus
+        .Error)
+    {
         let modulus = try Cyclic.Group.Modulus(Cardinal(5))
         let a = Cyclic.Group.Element(__unchecked: Ordinal(1))
         let b = Cyclic.Group.Element(__unchecked: Ordinal(3))
@@ -132,7 +143,9 @@ extension Cyclic.Group.`Dynamic cyclic groups normalize residues under a positiv
     }
 
     @Test
-    func `Cyclic index advancement wraps after reaching capacity`() throws(Cyclic.Group.Modulus.Error) {
+    func `Cyclic index advancement wraps after reaching capacity`() throws(Cyclic.Group.Modulus
+        .Error)
+    {
         let capacity = try Cyclic.Group.Modulus(Cardinal(4))
         var tail = Cyclic.Group.Element.zero
 
@@ -150,7 +163,9 @@ extension Cyclic.Group.`Dynamic cyclic groups normalize residues under a positiv
     }
 }
 
-extension Cyclic.Group.`Dynamic cyclic groups normalize residues under a positive modulus`.`Cyclic group construction rejects a zero modulus` {
+extension Cyclic.Group.`Dynamic cyclic groups normalize residues under a positive modulus`
+    .`Cyclic group construction rejects a zero modulus`
+{
 
     @Test
     func `Zero modulus throws`() {
