@@ -4,7 +4,9 @@ import Testing
 
 @testable import Cyclic
 
-extension Cyclic.Group {
+enum `Cyclic.Group Tests` {}
+
+extension `Cyclic.Group Tests` {
     @Suite
     struct `Dynamic cyclic groups normalize residues under a positive modulus` {
         @Suite struct `Cyclic group arithmetic wraps residues and preserves group laws` {}
@@ -12,7 +14,7 @@ extension Cyclic.Group {
     }
 }
 
-extension Cyclic.Group.`Dynamic cyclic groups normalize residues under a positive modulus`
+extension `Cyclic.Group Tests`.`Dynamic cyclic groups normalize residues under a positive modulus`
     .`Cyclic group arithmetic wraps residues and preserves group laws`
 {
 
@@ -162,7 +164,7 @@ extension Cyclic.Group.`Dynamic cyclic groups normalize residues under a positiv
     }
 }
 
-extension Cyclic.Group.`Dynamic cyclic groups normalize residues under a positive modulus`
+extension `Cyclic.Group Tests`.`Dynamic cyclic groups normalize residues under a positive modulus`
     .`Cyclic group construction rejects a zero modulus`
 {
 

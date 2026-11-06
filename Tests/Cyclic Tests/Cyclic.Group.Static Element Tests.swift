@@ -5,7 +5,7 @@ import Testing
 
 @testable import Cyclic
 
-extension Cyclic.Group {
+extension `Cyclic.Group Tests` {
     @Suite
     struct `Static cyclic elements preserve their order through construction and arithmetic` {
         @Suite struct `Static cyclic arithmetic wraps positions and preserves group identities` {}
@@ -13,8 +13,7 @@ extension Cyclic.Group {
     }
 }
 
-extension Cyclic.Group
-    .`Static cyclic elements preserve their order through construction and arithmetic`
+extension `Cyclic.Group Tests`.`Static cyclic elements preserve their order through construction and arithmetic`
     .`Static cyclic arithmetic wraps positions and preserves group identities`
 {
 
@@ -163,8 +162,7 @@ extension Cyclic.Group
     }
 }
 
-extension Cyclic.Group
-    .`Static cyclic elements preserve their order through construction and arithmetic`
+extension `Cyclic.Group Tests`.`Static cyclic elements preserve their order through construction and arithmetic`
     .`Static cyclic boundaries reject invalid orders and positions`
 {
 
