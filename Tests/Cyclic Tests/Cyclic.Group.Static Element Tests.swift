@@ -8,9 +8,13 @@ import Testing
 extension `Cyclic.Group Tests` {
     @Suite
     struct `Static cyclic elements preserve their order through construction and arithmetic` {
-        @Suite struct `Static cyclic arithmetic wraps positions and preserves group identities` {}
-        @Suite struct `Static cyclic boundaries reject invalid orders and positions` {}
     }
+}
+
+extension `Cyclic.Group Tests`.`Static cyclic elements preserve their order through construction and arithmetic` {
+    @Suite struct `Static cyclic arithmetic wraps positions and preserves group identities` {}
+
+    @Suite struct `Static cyclic boundaries reject invalid orders and positions` {}
 }
 
 extension `Cyclic.Group Tests`.`Static cyclic elements preserve their order through construction and arithmetic`

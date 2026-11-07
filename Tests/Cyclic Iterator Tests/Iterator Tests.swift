@@ -2,12 +2,16 @@
     import Cyclic
     import Testing
 
-    @Suite
-    struct `Cyclic Iterator Tests` {
-        @Suite struct Unit {}
-    }
+enum `Iterator Tests` {}
 
-    extension `Cyclic Iterator Tests`.Unit {
+extension `Iterator Tests` {
+        @Suite
+        struct `Cyclic Iterator Tests` {
+            @Suite struct Unit {}
+        }
+}
+
+    extension `Iterator Tests`.`Cyclic Iterator Tests`.Unit {
         @Test
         func `count equals the modulus`() {
             let count: Cardinal = Cyclic.Group.Static<5>.count

@@ -9,9 +9,13 @@ enum `Cyclic.Group Tests` {}
 extension `Cyclic.Group Tests` {
     @Suite
     struct `Dynamic cyclic groups normalize residues under a positive modulus` {
-        @Suite struct `Cyclic group arithmetic wraps residues and preserves group laws` {}
-        @Suite struct `Cyclic group construction rejects a zero modulus` {}
     }
+}
+
+extension `Cyclic.Group Tests`.`Dynamic cyclic groups normalize residues under a positive modulus` {
+    @Suite struct `Cyclic group arithmetic wraps residues and preserves group laws` {}
+
+    @Suite struct `Cyclic group construction rejects a zero modulus` {}
 }
 
 extension `Cyclic.Group Tests`.`Dynamic cyclic groups normalize residues under a positive modulus`

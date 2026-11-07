@@ -10,14 +10,23 @@
     private enum Slot {}
     private enum OtherSlot {}
 
-    @Suite
-    struct `Index Cyclic Tests` {
+enum `Index.Cyclic Tests` {}
+
+extension `Index.Cyclic Tests` {
+        @Suite
+        struct `Index Cyclic Tests` {
+        }
+}
+
+    extension `Index.Cyclic Tests`.`Index Cyclic Tests` {
         @Suite struct `Construction respects the modulus` {}
+
         @Suite struct `Arithmetic retains the domain` {}
+
         @Suite struct `Value semantics retain the domain` {}
     }
 
-    extension `Index Cyclic Tests`.`Construction respects the modulus` {
+    extension `Index.Cyclic Tests`.`Index Cyclic Tests`.`Construction respects the modulus` {
 
         @Test
         func `typed ordinal constructs a cyclic index`() throws {
@@ -52,7 +61,7 @@
         }
     }
 
-    extension `Index Cyclic Tests`.`Arithmetic retains the domain` {
+    extension `Index.Cyclic Tests`.`Index Cyclic Tests`.`Arithmetic retains the domain` {
 
         @Test
         func `tagged addition wraps`() throws {
@@ -83,7 +92,7 @@
         }
     }
 
-    extension `Index Cyclic Tests`.`Value semantics retain the domain` {
+    extension `Index.Cyclic Tests`.`Index Cyclic Tests`.`Value semantics retain the domain` {
 
         @Test
         func `cyclic indices have intrinsic value semantics`() throws {

@@ -23,14 +23,22 @@
         Index<Slot>.Offset(rawValue)
     }
 
-    @Suite
-    struct `Index Modular Tests` {
+enum `Index.Modular Tests` {}
+
+extension `Index.Modular Tests` {
+        @Suite
+        struct `Index Modular Tests` {
+            @Suite struct `Edge Case` {}
+        }
+}
+
+    extension `Index.Modular Tests`.`Index Modular Tests` {
         @Suite struct `Valid modular operations` {}
-        @Suite struct `Edge Case` {}
+
         @Suite struct `Ring buffer integration` {}
     }
 
-    extension `Index Modular Tests`.`Valid modular operations` {
+    extension `Index.Modular Tests`.`Index Modular Tests`.`Valid modular operations` {
 
         @Test
         func `successor without wrap`() {
@@ -73,7 +81,7 @@
         }
     }
 
-    extension `Index Modular Tests`.`Edge Case` {
+    extension `Index.Modular Tests`.`Index Modular Tests`.`Edge Case` {
 
         @Test
         func `successor and predecessor wrap`() {
@@ -102,7 +110,7 @@
         }
     }
 
-    extension `Index Modular Tests`.`Ring buffer integration` {
+    extension `Index.Modular Tests`.`Index Modular Tests`.`Ring buffer integration` {
 
         @Test
         func `ring buffer simulation remains in its typed domain`() {
