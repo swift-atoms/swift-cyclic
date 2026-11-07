@@ -81,3 +81,65 @@ extension Cyclic::Cyclic.Group.Static.Element {
         hasher.combine(position.rawValue)
     }
 }
+
+extension Cyclic::Cyclic.Group.Static.Element: Swift::CustomStringConvertible {
+
+    public var description: String {
+        "Cyclic.Group.Static<\(modulus)>.Element(\(position))"
+    }
+}
+
+extension Cyclic::Cyclic.Group.Static.Element {
+
+    @inlinable
+    public static var zero: Self { Self(__unchecked: .zero) }
+
+    @inlinable
+    public static var one: Self {
+        Self(__unchecked: modulus > 1 ? Ordinal::Ordinal(1 as UInt) : .zero)
+    }
+}
+
+extension Cyclic::Cyclic.Group.Static.Element {
+
+    @inlinable
+    public static func + (lhs: Self, rhs: Self) -> Self {
+        let reduced = __cyclicAdd(
+            lhs.position.rawValue,
+            rhs.position.rawValue,
+            modulus: Self.order.rawValue
+        )
+        return Self(__unchecked: Ordinal::Ordinal(reduced))
+    }
+
+    @inlinable
+    public static func - (lhs: Self, rhs: Self) -> Self {
+
+        let reduced = __cyclicSubtract(
+            lhs.position.rawValue,
+            rhs.position.rawValue,
+            modulus: Self.order.rawValue
+        )
+        return Self(__unchecked: Ordinal::Ordinal(reduced))
+    }
+
+    @inlinable
+    public static func += (lhs: inout Self, rhs: Self) {
+        lhs = lhs + rhs
+    }
+
+    @inlinable
+    public static func -= (lhs: inout Self, rhs: Self) {
+        lhs = lhs - rhs
+    }
+}
+
+extension Cyclic::Cyclic.Group.Static.Element {
+
+    @inlinable
+    public var inverse: Self {
+        let residue = position.rawValue % Self.order.rawValue
+        if residue == 0 { return Self(__unchecked: .zero) }
+        return Self(__unchecked: Ordinal::Ordinal(Self.order.rawValue - residue))
+    }
+}
