@@ -122,7 +122,7 @@
     private struct OwnedSlot: ~Copyable {}
 
     extension Cyclic_Tagged_Tests {
-        @Test func singletonGroupWithNoncopyableTagPreservesIdentity() throws {
+        @Test func `singleton group with noncopyable tag preserves identity`() throws {
             typealias Value = Tagged<OwnedSlot, Cyclic.Group.Static<1>.Element>
             let zero = try Value(Ordinal(UInt(0)))
             let wrapped = Value(wrapping: Ordinal(UInt.max))
@@ -131,7 +131,7 @@
             #expect(zero.inverse().underlying.position.rawValue == 0)
         }
 
-        @Test func validationRejectsMaximumOrdinalWithoutNarrowing() {
+        @Test func `validation rejects maximum ordinal without narrowing`() {
             typealias Value = Tagged<Slot, Cyclic.Group.Static<5>.Element>
             #expect(throws: Cyclic.Group.Static<5>.Element.Error.outOfBounds(Ordinal(UInt.max))) {
                 _ = try Value(Ordinal(UInt.max))
