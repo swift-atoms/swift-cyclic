@@ -9,9 +9,9 @@
 
     private struct Domain: ~Copyable, ~Escapable {}
 
-enum `Index.Modular full width Tests` {}
+    enum `Index.Modular full width Tests` {}
 
-extension `Index.Modular full width Tests` {
+    extension `Index.Modular full width Tests` {
         @Suite struct `Modular indices preserve full width offsets` {
             @Test(arguments: [UInt(1), 2, 3, 5, 97, UInt(Int.max) + 1, UInt.max])
             func `signed offsets agree with an exact integer oracle`(capacity: UInt) {
@@ -113,7 +113,7 @@ extension `Index.Modular full width Tests` {
                 }
             }
         }
-}
+    }
 
     private func reduced(_ value: Int128, _ capacity: UInt) -> UInt {
         let modulus = Int128(capacity)

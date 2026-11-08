@@ -10,13 +10,13 @@
     private enum Slot {}
     private enum OtherSlot {}
 
-enum `Index.Cyclic Tests` {}
+    enum `Index.Cyclic Tests` {}
 
-extension `Index.Cyclic Tests` {
+    extension `Index.Cyclic Tests` {
         @Suite
         struct `Index Cyclic Tests` {
         }
-}
+    }
 
     extension `Index.Cyclic Tests`.`Index Cyclic Tests` {
         @Suite struct `Construction respects the modulus` {}

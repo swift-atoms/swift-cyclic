@@ -3,9 +3,9 @@
         import Foundation
         import Testing
 
-enum `Compiler Tests` {}
+        enum `Compiler Tests` {}
 
-extension `Compiler Tests` {
+        extension `Compiler Tests` {
             @Suite struct `Modular arithmetic requires matching domains` {
                 @Test(arguments: ["MATCHING", "MISMATCH_OFFSET", "MISMATCH_CAPACITY"])
                 func `the compiler checks both offset and capacity domains`(
@@ -48,6 +48,6 @@ extension `Compiler Tests` {
                     #expect(!diagnostic.contains("no such module"))
                 }
             }
-}
+        }
     #endif
 #endif

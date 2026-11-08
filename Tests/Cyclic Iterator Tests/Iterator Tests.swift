@@ -2,14 +2,14 @@
     import Cyclic
     import Testing
 
-enum `Iterator Tests` {}
+    enum `Iterator Tests` {}
 
-extension `Iterator Tests` {
+    extension `Iterator Tests` {
         @Suite
         struct `Cyclic Iterator Tests` {
             @Suite struct Unit {}
         }
-}
+    }
 
     extension `Iterator Tests`.`Cyclic Iterator Tests`.Unit {
         @Test

@@ -23,14 +23,14 @@
         Index<Slot>.Offset(rawValue)
     }
 
-enum `Index.Modular Tests` {}
+    enum `Index.Modular Tests` {}
 
-extension `Index.Modular Tests` {
+    extension `Index.Modular Tests` {
         @Suite
         struct `Index Modular Tests` {
             @Suite struct `Edge Case` {}
         }
-}
+    }
 
     extension `Index.Modular Tests`.`Index Modular Tests` {
         @Suite struct `Valid modular operations` {}
