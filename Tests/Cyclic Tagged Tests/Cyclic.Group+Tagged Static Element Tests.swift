@@ -8,7 +8,7 @@
 
     private enum Slot {}
 
-    @Suite("Cyclic × Tagged")
+    @Suite
     struct Cyclic_Tagged_Tests {}
 
     extension Cyclic_Tagged_Tests {
