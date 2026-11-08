@@ -1,6 +1,6 @@
 #if Iterator
-    @_exported public import Cardinal
-    @_exported public import Iterator
-    @_exported public import Ordinal
-    @_exported public import Sequence
+    public import Cardinal
+    public import Iterator
+    public import Ordinal
+    public import Sequence
 #endif
